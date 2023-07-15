@@ -25,13 +25,13 @@ public class AjoutOccuperController implements Initializable {
         stage.close();
     }
     public void AddNewSejour(ActionEvent event) throws Exception{
-        Occuper compteRendu =new Occuper(0, Integer.parseInt(IdreservationTextField.getText()));
+        Occuper Rendue =new Occuper(0, Integer.parseInt(IdreservationTextField.getText()));
         Query query =new Query();
-        query.setCompteRenduListOccuper(compteRendu);
+        query.setCompteRenduListOccuper(Rendue);
         JOptionPane.showMessageDialog(null,"SuccessFully Added");
         ActionannulerOccuperButton(event);
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
