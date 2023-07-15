@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1375.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.landry.hotel.Controllers.ContentAllController">
+   <top>
+      <Pane prefHeight="0.0" prefWidth="1375.0" BorderPane.alignment="CENTER" />
+   </top>
+   <left>
+      <Pane prefHeight="710.0" prefWidth="255.0" style="-fx-background-color: #070141;" BorderPane.alignment="CENTER">
+         <children>
+            <VBox layoutY="216.0" prefHeight="496.0" prefWidth="256.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#Chambre" prefHeight="54.0" prefWidth="244.0" style="-fx-background-color: #070141;" text=" Chambre" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="54.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                     <padding>
+                        <Insets right="25.0" />
+                     </padding>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#Reservation" prefHeight="64.0" prefWidth="238.0" style="-fx-background-color: #070141;" text="Reservation" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="54.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#Sejouner" prefHeight="64.0" prefWidth="221.0" style="-fx-background-color: #070141;" text="Sejourner" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="54.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#Occuper" prefHeight="64.0" prefWidth="214.0" style="-fx-background-color: #070141;" text="Occuper" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="54.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="64.0" prefWidth="242.0" style="-fx-background-color: #070141;" text="Déconnection" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="54.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                     <VBox.margin>
+                        <Insets top="100.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <Label layoutX="31.0" layoutY="34.0" text="Solde Actuel:" textFill="WHITE" />
+            <Label fx:id="soldeIdLabel" layoutX="119.0" layoutY="34.0" style="-fx-font-size: 15px;" text="  " textFill="WHITE" />
+         </children>
+      </Pane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <StackPane fx:id="ContentArea" prefHeight="286.0" prefWidth="1082.0" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

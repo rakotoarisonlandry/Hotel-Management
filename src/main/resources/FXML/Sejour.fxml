@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.landry.hotel.Controllers.SejourController">
+   <children>
+      <AnchorPane prefHeight="710.0" prefWidth="1091.0">
+         <children>
+            <Button fx:id="AjoutSejour" layoutX="74.0" layoutY="73.0" mnemonicParsing="false" onAction="#actionAjoutSejour" prefHeight="25.0" prefWidth="104.0" text="+" />
+            <Button layoutX="393.0" layoutY="630.0" mnemonicParsing="false" onAction="#ActualiserButton" prefHeight="25.0" prefWidth="295.0" text="Actualiser" />
+            <Button layoutX="567.0" layoutY="73.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="123.0" text="OK" />
+            <TextField layoutX="350.0" layoutY="72.0" prefHeight="25.0" prefWidth="205.0" promptText="Recherche...." />
+            <Label layoutX="744.0" layoutY="115.0" text="Numero Chambre:" />
+            <TextField fx:id="numChambreTextField" disable="true" layoutX="744.0" layoutY="148.0" prefHeight="25.0" prefWidth="289.0" />
+            <Label layoutX="744.0" layoutY="195.0" text="Date Entrer:" />
+            <Label layoutX="745.0" layoutY="286.0" text="Nombre de jours:" />
+            <TextField fx:id="NombreJourstextField" disable="true" layoutX="744.0" layoutY="319.0" prefHeight="25.0" prefWidth="289.0" />
+            <Label layoutX="745.0" layoutY="369.0" text="Nom Client:" />
+            <TextField fx:id="NomclientTextField" disable="true" layoutX="745.0" layoutY="402.0" prefHeight="25.0" prefWidth="289.0" />
+            <Label layoutX="745.0" layoutY="451.0" text="Telelphone:" />
+            <TextField fx:id="TelephoneTextField" disable="true" layoutX="745.0" layoutY="484.0" prefHeight="25.0" prefWidth="289.0" />
+            <Button fx:id="ButtonMettreJours" disable="true" layoutX="743.0" layoutY="549.0" mnemonicParsing="false" onAction="#OnButtonUpdate" prefHeight="25.0" prefWidth="295.0" text="Mettre á Jours" />
+            <DatePicker fx:id="DateEntrerSejour" disable="true" layoutX="744.0" layoutY="226.0" prefHeight="25.0" prefWidth="289.0" />
+            <Button layoutX="73.0" layoutY="630.0" mnemonicParsing="false" onAction="#OnBtnDeleteSejour" prefHeight="25.0" prefWidth="295.0" text="Supprimer" />
+         </children></AnchorPane>
+      <TableView fx:id="SejourView" layoutX="74.0" layoutY="112.0" onMouseClicked="#getData" prefHeight="496.0" prefWidth="615.0">
+         <columns>
+            <TableColumn fx:id="ColIdSejouner" prefWidth="87.33332824707031" text="Id Sejouner" />
+            <TableColumn fx:id="ColInumchambredSejour" prefWidth="109.66668701171875" text="Numero Chambre" />
+            <TableColumn fx:id="coldateEntrerSejour" prefWidth="101.66668701171875" text="Date Entrer" />
+            <TableColumn fx:id="colNombresDejours" prefWidth="112.33331298828125" text="Nombre de jours" />
+            <TableColumn fx:id="colnomDeClient" prefWidth="115.33331298828125" text="Nom de client" />
+            <TableColumn fx:id="colTelephone" prefWidth="85.33331298828125" text="telephone" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

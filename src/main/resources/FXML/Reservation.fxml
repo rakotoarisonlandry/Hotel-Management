@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="710.0" prefWidth="1091.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.landry.hotel.Controllers.ReservationController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="ajout" layoutX="57.0" layoutY="126.0" mnemonicParsing="false" onAction="#ajoutbutton" prefHeight="25.0" prefWidth="135.0" text="AJouter" />
+         </children></AnchorPane>
+      <TableView fx:id="ReservationView" layoutX="58.0" layoutY="171.0" onMouseClicked="#getData" prefHeight="437.0" prefWidth="688.0">
+         <columns>
+            <TableColumn fx:id="ColIdReservation" prefWidth="80.33332824707031" text="IDReservation" />
+            <TableColumn fx:id="colNumChambre" prefWidth="100.99998474121094" text="numChambre" />
+            <TableColumn fx:id="colDateR" prefWidth="130.00001525878906" text="Date de Reservation" />
+            <TableColumn fx:id="colDateEntre" prefWidth="68.0" text="dateEntre" />
+            <TableColumn fx:id="colNbJour" prefWidth="109.33331298828125" text="Nombre De Jour" />
+            <TableColumn fx:id="colNom" prefWidth="107.6666259765625" text="Nom Client" />
+            <TableColumn fx:id="colMail" prefWidth="90.3333740234375" text="mail" />
+         </columns>
+      </TableView>
+      <Button layoutX="647.0" layoutY="125.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="96.0" text="Button" />
+      <TextField layoutX="389.0" layoutY="126.0" prefHeight="25.0" prefWidth="236.0" />
+      <Button fx:id="ButtonMiseAJours" disable="true" layoutX="773.0" layoutY="632.0" mnemonicParsing="false" onAction="#OnUpdateButton" prefHeight="25.0" prefWidth="300.0" text="Mettre a Jours" />
+      <Button layoutX="58.0" layoutY="632.0" mnemonicParsing="false" onAction="#OnBtnDeletereservation" prefHeight="25.0" prefWidth="331.0" text="Supprimer" />
+      <Button layoutX="416.0" layoutY="632.0" mnemonicParsing="false" onAction="#ActuliserButtonChambre" prefHeight="25.0" prefWidth="331.0" text="Actualiser" />
+      <Label fx:id="labelDateReservation" layoutX="770.0" layoutY="243.0" text="Date de Reservation:">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="771.0" layoutY="312.0" text="Date Entrer:">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelNombreJours" layoutX="771.0" layoutY="387.0" text="Nombre De Jours">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="NombreJoursTextField" disable="true" layoutX="771.0" layoutY="418.0" prefHeight="25.0" prefWidth="300.0" />
+      <DatePicker fx:id="DateReservation" disable="true" layoutX="771.0" layoutY="270.0" prefHeight="25.0" prefWidth="300.0" />
+      <DatePicker fx:id="DateEntrer" disable="true" layoutX="771.0" layoutY="341.0" prefHeight="25.0" prefWidth="300.0" />
+      <Label fx:id="labelNomClient" layoutX="772.0" layoutY="466.0" text="Nom Client:">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="NomClientTextField" disable="true" layoutX="772.0" layoutY="497.0" prefHeight="25.0" prefWidth="300.0" />
+      <Label fx:id="labelmail" layoutX="772.0" layoutY="540.0" text="Mail:">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="MailClientTextField" disable="true" layoutX="772.0" layoutY="571.0" prefHeight="25.0" prefWidth="300.0" />
+      <Label fx:id="labelnumero" layoutX="769.0" layoutY="173.0" text="Numero Chambre:">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="NumChambreTextField" disable="true" layoutX="769.0" layoutY="204.0" prefHeight="25.0" prefWidth="300.0" />
+   </children>
+</AnchorPane>

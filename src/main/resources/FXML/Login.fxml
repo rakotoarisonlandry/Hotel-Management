@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="492.0" prefWidth="774.0" style="-fx-background-color: #fff;" stylesheets="@../Styles/login.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.landry.hotel.Controllers.LoginController">
+   <children>
+      <VBox layoutX="2.0" prefHeight="492.0" prefWidth="387.0" style="-fx-background-color: #070141;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="394.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="210.0" fitWidth="316.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/illustration-offrez-vous-un-creatif.png" />
+               </image>
+               <VBox.margin>
+                  <Insets left="50.0" right="50.0" top="150.0" />
+               </VBox.margin>
+            </ImageView>
+         </children></VBox>
+      <TextField fx:id="userTextFiled" layoutX="465.0" layoutY="155.0" prefHeight="29.0" prefWidth="246.0" style="-fx-border-radius: 25%;" />
+      <Label layoutX="467.0" layoutY="126.0" style="-fx-font-weight: bold;" text="Username:">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.027450980618596077" green="0.003921568859368563" blue="0.2549019753932953" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.5137255191802979" green="0.3607843220233917" blue="0.33725491166114807" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill></Label>
+      <Label layoutX="469.0" layoutY="202.0" style="-fx-font-weight: bold;" text="Password:">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.027450980618596077" green="0.003921568859368563" blue="0.2549019753932953" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.5137255191802979" green="0.3607843220233917" blue="0.33725491166114807" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill></Label>
+      <Button fx:id="Cancelbutton" layoutX="467.0" layoutY="370.0" mnemonicParsing="false" onAction="#annuler" prefHeight="30.0" prefWidth="246.0" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #cc3229;" text="Annuler" textFill="WHITE" />
+      <Button fx:id="login" layoutX="466.0" layoutY="318.0" mnemonicParsing="false" onAction="#ActionBoutton" prefHeight="30.0" prefWidth="246.0" style="-fx-background-color: #3e2eca; -fx-font-weight: bold; -fx-font-size: 14px;" text="Se Connecter" textFill="WHITE" />
+      <PasswordField fx:id="passwordField" layoutX="467.0" layoutY="233.0" prefHeight="29.0" prefWidth="246.0" />
+      <Label fx:id="errorMessage" layoutX="439.0" layoutY="296.0" style="-fx-font-size: 14px;" text=" " textFill="#dd1212" />
+      <ImageView fitHeight="20.0" fitWidth="26.0" layoutX="504.0" layoutY="325.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/reservation.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
