@@ -61,5 +61,7 @@ public class AjoutChambreController  implements Initializable {
         query.setCompteRenduList(compteRendu);
         JOptionPane.showMessageDialog(null,"SuccessFully Added");
         ActionAnnulerPageChambreButton(event);
+        ChambreController chambre = new ChambreController();
+        chambre.showChambreList();
     }
 }

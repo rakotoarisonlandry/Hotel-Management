@@ -26,12 +26,12 @@ public class ContentAllController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         try {
             Soldeactuel();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
 
         try {
             Parent fxml  = FXMLLoader.load(getClass().getResource("/FXML/Chambre.fxml"));
@@ -70,11 +70,11 @@ public class ContentAllController implements Initializable {
     try {
         DBConnection dbConnection = new DBConnection();
         con = dbConnection.getConnection("hotel", "root", "");
-        ResultSet rs = con.createStatement().executeQuery("SELECT SoldeActuel FROM solde");
+        ResultSet rs = con.createStatement().executeQuery("SELECT `SoldeActuel` FROM solde");
 
         if (rs.next()) {
-            String soldeActuel = rs.getString("SoldeActuel");
-            soldeIdLabel.setText(soldeActuel);
+            double soldeActuel = rs.getDouble(1); // Récupérer le résultat en tant que double
+            soldeIdLabel.setText(String.valueOf(soldeActuel)); // Convertir le double en chaîne de caractères pour l'affichage
         }
         
         
