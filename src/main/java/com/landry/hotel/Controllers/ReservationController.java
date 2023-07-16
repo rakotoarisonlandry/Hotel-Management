@@ -1,6 +1,6 @@
 package com.landry.hotel.Controllers;
 
-import com.landry.hotel.DB.DBConnection;
+import  com.landry.hotel.DB.DBConnection;
 import com.landry.hotel.DB.Query;
 import com.landry.hotel.Models.Chambre;
 import com.landry.hotel.Models.Reservation;

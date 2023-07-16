@@ -66,20 +66,21 @@ public class ContentAllController implements Initializable {
         ContentArea.getChildren().setAll(fxml);
     }
 
-    public void Soldeactuel() throws SQLException {
-        try {
-            DBConnection dbConnection = new DBConnection();
-            con = dbConnection.getConnection("hotel", "root", "");
-            ResultSet rs = con.createStatement().executeQuery("select SoldeActuel from solde");
-            ObservableList data = FXCollections.observableArrayList();
-            while (rs.next()) {
+  public void Soldeactuel() throws SQLException {
+    try {
+        DBConnection dbConnection = new DBConnection();
+        con = dbConnection.getConnection("hotel", "root", "");
+        ResultSet rs = con.createStatement().executeQuery("SELECT SoldeActuel FROM solde");
 
-                data.add(new String(rs.getString(1)));
-            }
-            soldeIdLabel.setText(String.valueOf(data));
-        }catch (Exception e){
-            e.printStackTrace();
+        if (rs.next()) {
+            String soldeActuel = rs.getString("SoldeActuel");
+            soldeIdLabel.setText(soldeActuel);
         }
+        
+        
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+}
 }
 
