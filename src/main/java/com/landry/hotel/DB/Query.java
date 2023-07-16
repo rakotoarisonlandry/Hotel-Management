@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import java.sql.*;
 public class Query {
     Connection conn;
+    PreparedStatement st = null;
     public ObservableList<com.landry.hotel.Models.Reservation> getReservationList(){
         ObservableList<com.landry.hotel.Models.Reservation> ReservationList = FXCollections.observableArrayList();
         try{
@@ -84,7 +85,6 @@ public class Query {
         }
         return SejourList;
     }
-
     public void  setCompteRenduList(Chambre compteRendu){
         Connection conn=null;
         try{
@@ -115,11 +115,17 @@ public class Query {
             ps.setString(5,compteRendu.getNomClient());
             ps.setString(6, compteRendu.getTelephone());
             ps.execute();
+
+            String queryUpdate = "UPDATE solde SET SoldeActuel = SoldeActuel +(SELECT PrixNuite FROM chambre WHERE numChambre = ?) * ?";
+            PreparedStatement statement = conn.prepareStatement(queryUpdate);
+            statement.setString(1, compteRendu.getNumChambre());
+            statement.setInt(2, compteRendu.getNombreJours());
+            statement.execute();
+
         }catch(Exception e){
             e.printStackTrace();
         }
     }
-
 
     public void  setCompteRenduListOccuper(Occuper compteRendu){
         Connection conn=null;
@@ -199,6 +205,61 @@ public class Query {
         }
         return ChambreList;
     }
+
+//    public ObservableList<com.landry.hotel.Models.Chambre> getRechercheChambre(){
+//        ChambreController chambreController = new ChambreController();
+//
+//        ObservableList<com.landry.hotel.Models.Chambre> ChambreList = FXCollections.observableArrayList();
+//
+//        try{
+//            DBConnection dbConnection = new DBConnection();
+//            conn =dbConnection.getConnection("hotel","root","");
+//            String query=" SELECT * FROM chambre c LEFT JOIN reservation rs ON c.numChambre = rs.numChambre LEFT JOIN sejour sj ON c.numChambre = sj.numChambre WHERE rs.numChambre IS NULL  OR NOT (rs.dateReservation BETWEEN ? AND DATE_ADD(?, INTERVAL (rs.nombreJours) DAY))";
+////                    "OR NOT (rs.dateReservation BETWEEN rs.dateReservation AND DATE_ADD((rs.dateEntrer), INTERVAL (rs.nombreJours) DAY))";
+//            st = conn.prepareStatement(query);
+//            st.setString(1, String.valueOf(chambreController.DateRecherche.getValue()));
+//            Chambre Chambre;
+//            while(rs.next()){
+//                Chambre=new Chambre(rs.getString("numChambre"),rs.getString("Designation") , rs.getString("Type") , rs.getInt("PrixNuite"));
+//                ChambreList.add(Chambre);
+//            }
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//        return ChambreList;
+//    }
+public ObservableList<com.landry.hotel.Models.Chambre> getRechercheChambre() {
+    ChambreController chambreController = new ChambreController();
+
+    ObservableList<com.landry.hotel.Models.Chambre> ChambreList = FXCollections.observableArrayList();
+
+    try {
+        DBConnection dbConnection = new DBConnection();
+        conn = dbConnection.getConnection("hotel", "root", "");
+        String query = "SELECT * FROM chambre c LEFT JOIN reservation rs ON c.numChambre = rs.numChambre LEFT JOIN sejour sj ON c.numChambre = sj.numChambre WHERE rs.numChambre IS NULL OR NOT (rs.dateReservation BETWEEN ? AND DATE_ADD(?, INTERVAL rs.nombreJours DAY))";
+        PreparedStatement st = conn.prepareStatement(query);
+        st.setString(1, String.valueOf(chambreController.DateRecherche.getValue()));
+        ResultSet rs = st.executeQuery();
+        while (rs.next()) {
+            com.landry.hotel.Models.Chambre chambre = new com.landry.hotel.Models.Chambre(rs.getString("numChambre"), rs.getString("Designation"), rs.getString("Type"), rs.getInt("PrixNuite"));
+            ChambreList.add(chambre);
+        }
+        rs.close();
+        st.close();
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    } finally {
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+    return ChambreList;
+}
+
 
 
 }

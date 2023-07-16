@@ -139,20 +139,8 @@ public class SejourController implements Initializable {
 
         DBConnection dbConnection =new DBConnection();
         OccuperController controller =new OccuperController();
-
-        String queryDelete ="Delete from `chambre` where numChambre= ? ";
         con = dbConnection.getConnection("hotel","root","");
         if (controller.confirmation("Modifier")) {
-            try {
-                if (this.numchambre != null) {
-                    st = con.prepareStatement(queryDelete);
-                    st.setString(1, this.numchambre);
-                    st.executeUpdate();
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-
             String queryDeleteSejour = "Delete from `sejour` where idSejour= ?";
             con = dbConnection.getConnection("hotel", "root", "");
             try {

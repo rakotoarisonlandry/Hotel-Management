@@ -178,18 +178,18 @@ public class ReservationController implements Initializable {
                 throw new RuntimeException(e);
             }
 
-            String queryDeletechambre = "Delete from `chambre`  where numChambre= ?";
-            con = dbConnection.getConnection("hotel", "root", "");
-            try {
-                if (this.numChambre != null) {
-                    st = con.prepareStatement(queryDeletechambre);
-                    st.setString(1, this.numChambre);
-                    st.execute();
-                    ClearANDactive();
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+//            String queryDeletechambre = "Delete from `chambre`  where numChambre= ?";
+//            con = dbConnection.getConnection("hotel", "root", "");
+//            try {
+//                if (this.numChambre != null) {
+//                    st = con.prepareStatement(queryDeletechambre);
+//                    st.setString(1, this.numChambre);
+//                    st.execute();
+//                    ClearANDactive();
+//                }
+//            } catch (SQLException e) {
+//                throw new RuntimeException(e);
+//            }
         }
     }
 

@@ -3,6 +3,7 @@ import com.landry.hotel.DB.DBConnection;
 import com.landry.hotel.DB.Query;
 import com.landry.hotel.Models.Chambre;
 import com.landry.hotel.Models.Sejour;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,10 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -26,9 +24,7 @@ import javafx.stage.StageStyle;
 
 import javax.swing.*;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -46,6 +42,9 @@ public class ChambreController implements Initializable {
     public TableColumn<Chambre,Integer> colPrixnuite;
     @FXML
     public StackPane ContentChambre;
+
+    @FXML
+    public DatePicker DateRecherche;
 
     @FXML
     public TextField DesignationTextField;
@@ -84,6 +83,19 @@ public class ChambreController implements Initializable {
         showChambreList();
     }
 
+    public  void  RechercheBoutton (ActionEvent event) throws  Exception {
+        Query q= new Query();
+        ObservableList<Chambre> list = q.getRechercheChambre();
+        try{
+            ColInumchambre.setCellValueFactory(new PropertyValueFactory<Chambre, String>("numChambre"));
+            colDesignation.setCellValueFactory(new PropertyValueFactory<Chambre,String >("Designation"));
+            coltype.setCellValueFactory(new PropertyValueFactory<Chambre, String>("Type"));
+            colPrixnuite.setCellValueFactory(new PropertyValueFactory<Chambre, Integer>("PrixNuite"));
+            ChambreView.setItems(list);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 
     public void showChambreList(){
         Query q= new Query();
