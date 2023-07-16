@@ -47,8 +47,6 @@ public class AjoutReservationController implements Initializable {
         Reservation compteRendu =new Reservation(0, NumChambreTextfield.getText(), Date.valueOf(DateEntrerReservation.getValue()), Date.valueOf(DateEntrer.getValue()),Integer.parseInt(NombreJours.getText()),NomClient.getText(),mail.getText());
         Query query =new Query();
         query.setCompteRenduListReservation(compteRendu);
-
-
         JOptionPane.showMessageDialog(null,"SuccessFully Added");
         BackButton(event);
     }

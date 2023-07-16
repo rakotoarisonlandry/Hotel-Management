@@ -44,7 +44,6 @@ public class Query {
         }
         return OccuperList;
     }
-
     public ObservableList<com.landry.hotel.Models.Solde> getSolde(){
         ObservableList<com.landry.hotel.Models.Solde> SoldeList = FXCollections.observableArrayList();
         try{
@@ -139,17 +138,49 @@ public class Query {
     public void  setCompteRenduListReservation(Reservation compteRendu){
         Connection conn=null;
         try{
-            DBConnection dbConnection =new DBConnection();
-            conn= dbConnection.getConnection("hotel","root","");
-            String query ="Insert into reservation (idReservation,numChambre,dateReservation,dateEntrer,nombreJours,nomClient,mail) values (?,?,?,?,?,?,?)";
-            PreparedStatement ps= conn.prepareStatement(query);
-            ps.setInt(1,compteRendu.getIdReservation());
-            ps.setString(2,compteRendu.getNumChambre());
+//            DBConnection dbConnection =new DBConnection();
+//            conn= dbConnection.getConnection("hotel","root","");
+//            String query ="Insert into reservation (idReservation,numChambre,dateReservation,dateEntrer,nombreJours,nomClient,mail) values (?,?,?,?,?,?,?)";
+//
+//            PreparedStatement ps= conn.prepareStatement(query);
+//            ps.setInt(1,compteRendu.getIdReservation());
+//            ps.setString(2,compteRendu.getNumChambre());
+//            ps.setDate(3, compteRendu.getDateReservation());
+//            ps.setDate(4, (Date) compteRendu.getDateEntrer());
+//            ps.setInt(5,compteRendu.getNombreJours());
+//            ps.setString(6,compteRendu.getNomClient());
+//            ps.setString(7,compteRendu.getMail());
+//
+//
+//            String queryUpdate ="UPDATE `solde` SET" +
+//                    "`SoldeActuel`= (`SoldeActuel`+ " +
+//                    "(SELECT PrixNuite FROM chambre WHERE numChambre = ?)"+
+//                    "*(SELECT NombreJours FROM reservation WHERE idReservation =?))"+
+//                    "WHERE idSolde = 1";
+//            PreparedStatement statement = conn.prepareStatement(queryUpdate);
+//            statement.setString(1, compteRendu.getNumChambre());
+//            statement.setInt(2,compteRendu.getIdReservation());
+//            statement.execute();
+//            ps.execute();
+
+            DBConnection dbConnection = new DBConnection();
+            conn = dbConnection.getConnection("hotel", "root", "");
+
+            String queryUpdate = "UPDATE solde SET SoldeActuel = (SoldeActuel + (SELECT PrixNuite FROM chambre WHERE numChambre = ?) * (SELECT NombreJours FROM reservation WHERE idReservation = ?)) WHERE idSolde = 1";
+            PreparedStatement statement = conn.prepareStatement(queryUpdate);
+            statement.setString(1, compteRendu.getNumChambre());
+            statement.setInt(2, compteRendu.getIdReservation());
+            statement.execute();
+
+            String query = "INSERT INTO reservation (idReservation, numChambre, dateReservation, dateEntrer, nombreJours, nomClient, mail) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, compteRendu.getIdReservation());
+            ps.setString(2, compteRendu.getNumChambre());
             ps.setDate(3, compteRendu.getDateReservation());
             ps.setDate(4, (Date) compteRendu.getDateEntrer());
-            ps.setInt(5,compteRendu.getNombreJours());
-            ps.setString(6,compteRendu.getNomClient());
-            ps.setString(7,compteRendu.getMail());
+            ps.setInt(5, compteRendu.getNombreJours());
+            ps.setString(6, compteRendu.getNomClient());
+            ps.setString(7, compteRendu.getMail());
             ps.execute();
         }catch(Exception e){
             e.printStackTrace();
