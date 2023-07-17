@@ -1,13 +1,17 @@
 package com.landry.hotel.DB;
 
+import com.landry.hotel.Controllers.AjoutSejoutController;
 import com.landry.hotel.Controllers.ChambreController;
 import com.landry.hotel.Controllers.ContentAllController;
 import com.landry.hotel.Models.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import javax.swing.*;
 import java.sql.*;
 public class Query {
     Connection conn;
+    int i =0;
     PreparedStatement st = null;
     public ObservableList<com.landry.hotel.Models.Reservation> getReservationList(){
         ObservableList<com.landry.hotel.Models.Reservation> ReservationList = FXCollections.observableArrayList();
@@ -90,41 +94,94 @@ public class Query {
         try{
             DBConnection dbConnection =new DBConnection();
             conn= dbConnection.getConnection("hotel","root","");
-            String query ="Insert into chambre values (?,?,?,?)";
-            PreparedStatement ps= conn.prepareStatement(query);
-            ps.setString(1,compteRendu.getNumChambre());
-            ps.setString(2,compteRendu.getDesignation());
-            ps.setString(3,compteRendu.getType());
-            ps.setInt(4,compteRendu.getPrixNuite());
-            ps.execute();
+            String queryTest = "Select numChambre FROM chambre ";
+            Statement st = conn.createStatement();
+            ResultSet rs =st.executeQuery(queryTest);
+            while(rs.next()){
+
+                if (compteRendu.getNumChambre().equals(rs.getString("numChambre"))){
+                    i+=1;
+                    break;
+                }
+            }
+            /**/
         }catch(Exception e){
             e.printStackTrace();
+        }
+        if (i> 0){
+            JOptionPane.showMessageDialog(null,"Le Chambre est deja crée ,Veuillez entrer un autre");
+            i=0;
+        }
+        else {
+            try {
+                DBConnection dbConnection = new DBConnection();
+                conn = dbConnection.getConnection("hotel", "root", "");
+                String query = "Insert into chambre values (?,?,?,?)";
+                PreparedStatement ps = conn.prepareStatement(query);
+                ps.setString(1, compteRendu.getNumChambre());
+                ps.setString(2, compteRendu.getDesignation());
+                ps.setString(3, compteRendu.getType());
+                ps.setInt(4, compteRendu.getPrixNuite());
+                ps.execute();
+                JOptionPane.showMessageDialog(null,"Ajouter avec succes");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
     public void  setCompteRenduListSejour(Sejour compteRendu){
         Connection conn=null;
+        AjoutSejoutController controller = new AjoutSejoutController();
         try{
             DBConnection dbConnection =new DBConnection();
             conn= dbConnection.getConnection("hotel","root","");
-            String query ="Insert into sejour values (?,?,?,?,?,?)";
-            PreparedStatement ps= conn.prepareStatement(query);
-            ps.setInt(1,compteRendu.getIdSejour());
-            ps.setString(2,compteRendu.getNumChambre());
-            ps.setDate(3, (Date) compteRendu.getDateEntreSejour());
-            ps.setInt(4,compteRendu.getNombreJours());
-            ps.setString(5,compteRendu.getNomClient());
-            ps.setString(6, compteRendu.getTelephone());
-            ps.execute();
+            String queryTest = "Select numChambre FROM sejour ";
+            Statement st = conn.createStatement();
+            ResultSet rs =st.executeQuery(queryTest);
+            while(rs.next()){
 
-            String queryUpdate = "UPDATE solde SET SoldeActuel = SoldeActuel +(SELECT PrixNuite FROM chambre WHERE numChambre = ?) * ?";
-            PreparedStatement statement = conn.prepareStatement(queryUpdate);
-            statement.setString(1, compteRendu.getNumChambre());
-            statement.setInt(2, compteRendu.getNombreJours());
-            statement.execute();
-
+                if (compteRendu.getNumChambre().equals(rs.getString("numChambre"))){
+                    i+=1;
+                    break;
+                }
+            }
+            /**/
         }catch(Exception e){
             e.printStackTrace();
         }
+        if (i> 0){
+            JOptionPane.showMessageDialog(null,"Le Chambre est deja occuper , Choisir une autre Chambre");
+            i=0;
+        }
+        else {
+            try {
+                DBConnection dbConnection =new DBConnection();
+                conn= dbConnection.getConnection("hotel","root","");
+                String query ="Insert into sejour values (?,?,?,?,?,?) ";
+                PreparedStatement ps= conn.prepareStatement(query);
+                ps.setInt(1,compteRendu.getIdSejour());
+                ps.setString(2,compteRendu.getNumChambre());
+                ps.setDate(3, (Date) compteRendu.getDateEntreSejour());
+                ps.setInt(4,compteRendu.getNombreJours());
+                ps.setString(5,compteRendu.getNomClient());
+                ps.setString(6, compteRendu.getTelephone());
+                ps.execute();
+
+                String queryUpdate = "UPDATE solde SET SoldeActuel = SoldeActuel +(SELECT PrixNuite FROM chambre WHERE numChambre = ?) * ?";
+                PreparedStatement statement = conn.prepareStatement(queryUpdate);
+                statement.setString(1, compteRendu.getNumChambre());
+                statement.setInt(2, compteRendu.getNombreJours());
+                statement.execute();
+
+                JOptionPane.showMessageDialog(null,"SuccessFully Added");
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
+        }
+
     }
 
     public void  setCompteRenduListOccuper(Occuper compteRendu){
@@ -136,7 +193,6 @@ public class Query {
             PreparedStatement ps= conn.prepareStatement(query);
             ps.setInt(1,compteRendu.getIdOccuper());
             ps.setInt(2,compteRendu.getIdReservation());
-
             ps.execute();
         }catch(Exception e){
             e.printStackTrace();
@@ -146,46 +202,59 @@ public class Query {
     public void  setCompteRenduListReservation(Reservation compteRendu){
         Connection conn=null;
         try{
-            DBConnection dbConnection = new DBConnection();
-            conn = dbConnection.getConnection("hotel", "root", "");
+            DBConnection dbConnection =new DBConnection();
+            conn= dbConnection.getConnection("hotel","root","");
+            String queryTest = "Select numChambre FROM reservation ";
+            Statement st = conn.createStatement();
+            ResultSet rs =st.executeQuery(queryTest);
+            while(rs.next()){
 
-            String query = "INSERT INTO reservation (idReservation, numChambre, dateReservation, dateEntrer, nombreJours, nomClient, mail) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setInt(1, compteRendu.getIdReservation());
-            ps.setString(2, compteRendu.getNumChambre());
-            ps.setDate(3, compteRendu.getDateReservation());
-            ps.setDate(4, (Date) compteRendu.getDateEntrer());
-            ps.setInt(5, compteRendu.getNombreJours());
-            ps.setString(6, compteRendu.getNomClient());
-            ps.setString(7, compteRendu.getMail());
-            ps.execute();
-
-            String queryUpdate = "UPDATE solde SET SoldeActuel = SoldeActuel +(SELECT PrixNuite FROM chambre WHERE numChambre = ?) * ?";
-            PreparedStatement statement = conn.prepareStatement(queryUpdate);
-            statement.setString(1, compteRendu.getNumChambre());
-            statement.setInt(2, compteRendu.getNombreJours());
-            statement.execute();
-            ContentAllController controller =new ContentAllController();
-            controller.Soldeactuel();
+                if (compteRendu.getNumChambre().equals(rs.getString("numChambre"))){
+                    i+=1;
+                    break;
+                }
+            }
+            /**/
         }catch(Exception e){
             e.printStackTrace();
         }
-    }
+        if (i> 0){
+            JOptionPane.showMessageDialog(null,"Le Chambre est deja occuper ," +
+                    " Veuillez Choisir une autre Chambre s'il vous plait");
+            i=0;
+        }
+        else {
+            try {
+                DBConnection dbConnection = new DBConnection();
+                conn = dbConnection.getConnection("hotel", "root", "");
 
+                String query = "INSERT INTO reservation (idReservation, numChambre, dateReservation, dateEntrer, nombreJours, nomClient, mail) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                PreparedStatement ps = conn.prepareStatement(query);
+                ps.setInt(1, compteRendu.getIdReservation());
+                ps.setString(2, compteRendu.getNumChambre());
+                ps.setDate(3, compteRendu.getDateReservation());
+                ps.setDate(4, (Date) compteRendu.getDateEntrer());
+                ps.setInt(5, compteRendu.getNombreJours());
+                ps.setString(6, compteRendu.getNomClient());
+                ps.setString(7, compteRendu.getMail());
+                ps.execute();
 
+                String queryUpdate = "UPDATE solde SET SoldeActuel = SoldeActuel +(SELECT PrixNuite FROM chambre WHERE numChambre = ?) * ?";
+                PreparedStatement statement = conn.prepareStatement(queryUpdate);
+                statement.setString(1, compteRendu.getNumChambre());
+                statement.setInt(2, compteRendu.getNombreJours());
+                statement.execute();
+                ContentAllController controller = new ContentAllController();
+                controller.Soldeactuel();
 
-    public void deleteChambreList(Chambre Chambre){
-        Connection connection=null;
-        try{
-            DBConnection dbConnection =new DBConnection();
-            connection=dbConnection.getConnection("hotel","root","");
-            PreparedStatement ps= connection.prepareStatement("Delete from `chambre` where numChambre= ?");
-            ps.setString(1,Chambre.getNumChambre());
-            ps.execute();
-        }catch (Exception e){
-            e.printStackTrace();
+                JOptionPane.showMessageDialog(null,"ajouter avec succes!!!");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
+
+
 
     public ObservableList<com.landry.hotel.Models.Chambre> getChambre(){
         ObservableList<com.landry.hotel.Models.Chambre> ChambreList = FXCollections.observableArrayList();

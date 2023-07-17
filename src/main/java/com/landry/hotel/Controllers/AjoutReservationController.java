@@ -43,13 +43,15 @@ public class AjoutReservationController implements Initializable {
         Stage stage =(Stage) back.getScene().getWindow();
         stage.close();
     }
+    
     public void AddNewReservation(ActionEvent event) throws Exception {
         Reservation compteRendu =new Reservation(0, NumChambreTextfield.getText(), Date.valueOf(DateEntrerReservation.getValue()), Date.valueOf(DateEntrer.getValue()),Integer.parseInt(NombreJours.getText()),NomClient.getText(),mail.getText());
         Query query =new Query();
         query.setCompteRenduListReservation(compteRendu);
-        JOptionPane.showMessageDialog(null,"SuccessFully Added");
         BackButton(event);
     }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

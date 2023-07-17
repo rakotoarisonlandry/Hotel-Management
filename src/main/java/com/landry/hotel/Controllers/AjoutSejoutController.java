@@ -42,7 +42,6 @@ public class AjoutSejoutController implements Initializable {
         Sejour compteRendu =new Sejour(0,NumbreTextField.getText(), Date.valueOf(DateEntrerSejour.getValue()) ,Integer.parseInt(NombreJoursTextField.getText()),nomClientTextField.getText(),telephoneTextField.getText());
         Query query =new Query();
         query.setCompteRenduListSejour(compteRendu);
-        JOptionPane.showMessageDialog(null,"SuccessFully Added");
         ActionannulerSejourButton(event);
     }
     @Override

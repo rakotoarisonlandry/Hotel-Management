@@ -66,6 +66,7 @@ public class ReservationController implements Initializable {
     public  void  ActuliserButtonChambre(ActionEvent event ) throws  Exception{
         showReservationList();
     }
+
     @FXML
     public void ajoutbutton(ActionEvent actionEvent) throws Exception{
         try {
@@ -160,6 +161,16 @@ public class ReservationController implements Initializable {
         catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+            String queryUpdate2 = "UPDATE solde SET SoldeActuel = SoldeActuel + (SELECT PrixNuite FROM chambre WHERE numChambre = ?) * (? - ?)";
+            try (PreparedStatement statement = con.prepareStatement(queryUpdate2)) {
+                statement.setString(1, this.numChambre);
+                statement.setInt(2,Integer.parseInt(NombreJoursTextField.getText()));
+                statement.setInt(3, this.NombreJours);
+                statement.execute();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 //    public void OnBtnDeletereservation(ActionEvent actionEvent) {

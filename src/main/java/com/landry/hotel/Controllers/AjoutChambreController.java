@@ -59,7 +59,6 @@ public class AjoutChambreController  implements Initializable {
         Chambre compteRendu =new Chambre(numChambreTextfield.getText(),DesignationTextfield.getText(),TypeTextFiel.getText(),Integer.parseInt(PriNuiteTextField.getText()));
         Query query =new Query();
         query.setCompteRenduList(compteRendu);
-        JOptionPane.showMessageDialog(null,"SuccessFully Added");
         ActionAnnulerPageChambreButton(event);
         ChambreController chambre = new ChambreController();
         chambre.showChambreList();

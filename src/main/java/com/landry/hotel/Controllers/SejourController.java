@@ -1,5 +1,6 @@
 package com.landry.hotel.Controllers;
 
+import com.itextpdf.text.Document;
 import com.landry.hotel.DB.DBConnection;
 import com.landry.hotel.DB.Query;
 import com.landry.hotel.Models.Chambre;
@@ -16,13 +17,16 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import  com.itextpdf.text.pdf.PdfWriter;
 import javafx.stage.StageStyle;
-
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import javax.swing.*;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -81,6 +85,73 @@ public class SejourController implements Initializable {
         }
     }
 
+//    @FXML
+//    void relever(ActionEvent event) throws FileNotFoundException, DocumentException, ClassNotFoundException, SQLException {
+//        DBConnection dbConnection =new DBConnection();
+//        con= dbConnection.getConnection("hotel","root","");
+//        String queryTest = "Select numChambre FROM sejour ";
+//
+//        Statement st = con.createStatement();
+//        ResultSet rs =st.executeQuery(queryTest);
+//
+//
+//        String file_name = "C:\\Users\\Landry Brigea.pdf";
+//        Document document = new Document();
+//        PdfWriter.getInstance(document,new FileOutputStream(file_name));
+//        document.open();
+//        Paragraph para = new Paragraph("Recus de reservation");
+//        document.add(para);
+//        while (rs.next()){
+//            para = new Paragraph("Annee Scolaire : 2022-2023" );
+//            document.add(para);
+//            para = new Paragraph("Sejour Numero " + rs.getString("idSejour"));
+//            document.add(para);
+//            para = new Paragraph("Nom Client :" + rs.getString("nomClient"));
+//            document.add(para);
+//            para = new Paragraph("Designation Chambre : " + rs.getString("numChambre"));
+//            document.add(para);
+//            para = new Paragraph("Nombre de Jour : " + rs.getString("nombreJours"));
+//            document.add(para);
+//            para = new Paragraph("Date d'entrée : " + rs.getString("dateEntreSejours"));
+//            document.add(para);
+////            para = new Paragraph("Date de sortie : " + rs.getString(""));
+////            document.add(para);
+//        }
+//        document.close();
+//    }
+
+    @FXML
+    void GenererPdf(ActionEvent event) throws Exception {
+        DBConnection dbConnection = new DBConnection();
+        con = dbConnection.getConnection("hotel", "root", "");
+        String queryTest = "SELECT idSejour, numChambre, nomClient, nombreJours, dateEntreSejours FROM sejour";
+
+        Statement st = con.createStatement();
+        ResultSet rs = st.executeQuery(queryTest);
+
+        String file_name = "C:\\Users\\Landry Brigea \\ java.pdf";
+        Document document = new Document();
+        PdfWriter.getInstance(document, new FileOutputStream(file_name));
+        document.open();
+        Paragraph para = new Paragraph("Recus de reservation");
+        document.add(para);
+        while (rs.next()) {
+            para = new Paragraph("Sejour Numero " + rs.getString("idSejour"));
+            document.add(para);
+            para = new Paragraph("Nom Client :" + rs.getString("nomClient"));
+            document.add(para);
+            para = new Paragraph("Designation Chambre : " + rs.getString("numChambre"));
+            document.add(para);
+            para = new Paragraph("Nombre de Jour : " + rs.getString("nombreJours"));
+            document.add(para);
+            para = new Paragraph("Date d'entrée : " + rs.getString("dateEntreSejours"));
+            document.add(para);
+//            para = new Paragraph("Date de sortie : " + rs.getString(""));
+//            document.add(para);
+        }
+        document.close();
+    }
+
 
 
     @FXML
@@ -135,6 +206,16 @@ public class SejourController implements Initializable {
                 }
             }
             catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+            String queryUpdate2 = "UPDATE solde SET SoldeActuel = SoldeActuel + (SELECT PrixNuite FROM chambre WHERE numChambre = ?) * (? - ?)";
+            try (PreparedStatement statement = con.prepareStatement(queryUpdate2)) {
+                statement.setString(1, this.numchambre);
+                statement.setInt(2, Integer.parseInt(NombreJourstextField.getText()));
+                statement.setInt(3, this.NombreJours);
+                statement.execute();
+            } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         }

@@ -10,7 +10,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.landry.hotel.Controllers.SejourController">
    <children>
-      <AnchorPane prefHeight="710.0" prefWidth="1091.0">
+      <AnchorPane onDragDetected="#GenererPdf" prefHeight="710.0" prefWidth="1091.0">
          <children>
             <Button fx:id="AjoutSejour" layoutX="74.0" layoutY="73.0" mnemonicParsing="false" onAction="#actionAjoutSejour" prefHeight="25.0" prefWidth="104.0" text="+" />
             <Button layoutX="393.0" layoutY="630.0" mnemonicParsing="false" onAction="#ActualiserButton" prefHeight="25.0" prefWidth="295.0" text="Actualiser" />
@@ -28,6 +28,7 @@
             <Button fx:id="ButtonMettreJours" disable="true" layoutX="743.0" layoutY="549.0" mnemonicParsing="false" onAction="#OnButtonUpdate" prefHeight="25.0" prefWidth="295.0" text="Mettre á Jours" />
             <DatePicker fx:id="DateEntrerSejour" disable="true" layoutX="744.0" layoutY="226.0" prefHeight="25.0" prefWidth="289.0" />
             <Button layoutX="73.0" layoutY="630.0" mnemonicParsing="false" onAction="#OnBtnDeleteSejour" prefHeight="25.0" prefWidth="295.0" text="Supprimer" />
+            <Button layoutX="737.0" layoutY="73.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="289.0" text="Generer PDF" />
          </children></AnchorPane>
       <TableView fx:id="SejourView" layoutX="74.0" layoutY="112.0" onMouseClicked="#getData" prefHeight="496.0" prefWidth="615.0">
          <columns>
