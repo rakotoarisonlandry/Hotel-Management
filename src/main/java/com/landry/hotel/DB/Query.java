@@ -228,37 +228,37 @@ public class Query {
 //        }
 //        return ChambreList;
 //    }
-public ObservableList<com.landry.hotel.Models.Chambre> getRechercheChambre() {
-    ChambreController chambreController = new ChambreController();
-
-    ObservableList<com.landry.hotel.Models.Chambre> ChambreList = FXCollections.observableArrayList();
-
-    try {
-        DBConnection dbConnection = new DBConnection();
-        conn = dbConnection.getConnection("hotel", "root", "");
-        String query = "SELECT * FROM chambre c LEFT JOIN reservation rs ON c.numChambre = rs.numChambre LEFT JOIN sejour sj ON c.numChambre = sj.numChambre WHERE rs.numChambre IS NULL OR NOT (rs.dateReservation BETWEEN ? AND DATE_ADD(?, INTERVAL rs.nombreJours DAY))";
-        PreparedStatement st = conn.prepareStatement(query);
-        st.setString(1, String.valueOf(chambreController.DateRecherche.getValue()));
-        ResultSet rs = st.executeQuery();
-        while (rs.next()) {
-            com.landry.hotel.Models.Chambre chambre = new com.landry.hotel.Models.Chambre(rs.getString("numChambre"), rs.getString("Designation"), rs.getString("Type"), rs.getInt("PrixNuite"));
-            ChambreList.add(chambre);
-        }
-        rs.close();
-        st.close();
-    } catch (SQLException e) {
-        throw new RuntimeException(e);
-    } finally {
-        if (conn != null) {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
-    return ChambreList;
-}
+//public ObservableList<com.landry.hotel.Models.Chambre> getRechercheChambre() {
+//    ChambreController chambreController = new ChambreController();
+//
+//    ObservableList<com.landry.hotel.Models.Chambre> ChambreList = FXCollections.observableArrayList();
+//
+//    try {
+//        DBConnection dbConnection = new DBConnection();
+//        conn = dbConnection.getConnection("hotel", "root", "");
+//        String query = "SELECT * FROM chambre c LEFT JOIN reservation rs ON c.numChambre = rs.numChambre LEFT JOIN sejour sj ON c.numChambre = sj.numChambre WHERE rs.numChambre IS NULL OR NOT (rs.dateReservation BETWEEN ? AND DATE_ADD(?, INTERVAL rs.nombreJours DAY))";
+//        PreparedStatement st = conn.prepareStatement(query);
+//        st.setDate(1, Date.valueOf(chambreController.DateRecherche.getValue()));
+//        ResultSet rs = st.executeQuery();
+//        while (rs.next()) {
+//            com.landry.hotel.Models.Chambre chambre = new com.landry.hotel.Models.Chambre(rs.getString("numChambre"), rs.getString("Designation"), rs.getString("Type"), rs.getInt("PrixNuite"));
+//            ChambreList.add(chambre);
+//        }
+//        rs.close();
+//        st.close();
+//    } catch (SQLException e) {
+//        throw new RuntimeException(e);
+//    } finally {
+//        if (conn != null) {
+//            try {
+//                conn.close();
+//            } catch (SQLException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }
+//    }
+//    return ChambreList;
+//}
 
 
 

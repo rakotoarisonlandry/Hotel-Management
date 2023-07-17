@@ -34,6 +34,7 @@ public class ReservationController implements Initializable {
     Connection con;
     Integer idReservation;
     String numChambre;
+    Integer NombreJours;
     public TableView <Reservation> ReservationView;
     public TableColumn <Reservation,Integer> ColIdReservation;
     public TableColumn <Reservation,String>colNumChambre;
@@ -107,6 +108,7 @@ public class ReservationController implements Initializable {
 
         this.idReservation = reservation.getIdReservation();
         this.numChambre = reservation.getNumChambre();
+        this.NombreJours = reservation.getNombreJours();
         NumChambreTextField.setText(reservation.getNumChambre());
         DateReservation.setValue(reservation.getDateReservation().toLocalDate());
         DateEntrer.setValue(reservation.getDateEntrer().toLocalDate());
@@ -160,12 +162,54 @@ public class ReservationController implements Initializable {
         }
         }
     }
-    public void OnBtnDeletereservation(ActionEvent actionEvent) {
+//    public void OnBtnDeletereservation(ActionEvent actionEvent) {
+//
+//        DBConnection dbConnection =new DBConnection();
+//        OccuperController controller = new OccuperController();
+//        String queryDelete ="Delete from `reservation` where numChambre= ?";
+//        con = dbConnection.getConnection("hotel","root","");
+//        if (controller.confirmation("Modifier")) {
+//            try {
+//                if (this.idReservation != null) {
+//                    st = con.prepareStatement(queryDelete);
+//                    st.setString(1, this.numChambre);
+//                    st.executeUpdate();
+//                    showReservationList();
+//                }
+//            } catch (SQLException e) {
+//                throw new RuntimeException(e);
+//            }
+//
+//            String queryUpdate = "UPDATE solde SET SoldeActuel = SoldeActuel -(SELECT PrixNuite FROM chambre WHERE numChambre = ?) * ?";
+//            PreparedStatement statement = null;
+//            try {
+//                statement = con.prepareStatement(queryUpdate);
+//            } catch (SQLException e) {
+//                throw new RuntimeException(e);
+//            }
+//            try {
+//                statement.setString(1, this.numChambre);
+//            } catch (SQLException e) {
+//                throw new RuntimeException(e);
+//            }
+//            try {
+//                statement.setInt(2, this.NombreJours);
+//            } catch (SQLException e) {
+//                throw new RuntimeException(e);
+//            }
+//            try {
+//                statement.execute();
+//            } catch (SQLException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }
+//    }
 
-        DBConnection dbConnection =new DBConnection();
+    public void OnBtnDeletereservation(ActionEvent actionEvent) {
+        DBConnection dbConnection = new DBConnection();
         OccuperController controller = new OccuperController();
-        String queryDelete ="Delete from `reservation` where numChambre= ?";
-        con = dbConnection.getConnection("hotel","root","");
+        String queryDelete = "DELETE FROM `reservation` WHERE numChambre = ?";
+        con = dbConnection.getConnection("hotel", "root", "");
         if (controller.confirmation("Modifier")) {
             try {
                 if (this.idReservation != null) {
@@ -177,21 +221,17 @@ public class ReservationController implements Initializable {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-
-//            String queryDeletechambre = "Delete from `chambre`  where numChambre= ?";
-//            con = dbConnection.getConnection("hotel", "root", "");
-//            try {
-//                if (this.numChambre != null) {
-//                    st = con.prepareStatement(queryDeletechambre);
-//                    st.setString(1, this.numChambre);
-//                    st.execute();
-//                    ClearANDactive();
-//                }
-//            } catch (SQLException e) {
-//                throw new RuntimeException(e);
-//            }
+            String queryUpdate = "UPDATE solde SET SoldeActuel = SoldeActuel - (SELECT PrixNuite FROM chambre WHERE numChambre = ?) * ?";
+            try (PreparedStatement statement = con.prepareStatement(queryUpdate)) {
+                statement.setString(1, this.numChambre);
+                statement.setInt(2, this.NombreJours);
+                statement.execute();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

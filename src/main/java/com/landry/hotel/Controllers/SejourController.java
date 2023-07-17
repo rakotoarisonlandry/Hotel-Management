@@ -30,6 +30,10 @@ public class SejourController implements Initializable {
     Connection con;
     PreparedStatement st;
     public  Integer idSejour;
+
+    public  Integer NombreJours;
+
+
     public String numchambre;
     public TableView<Sejour> SejourView;
     public TableColumn<Sejour,String> ColInumchambredSejour;
@@ -84,6 +88,7 @@ public class SejourController implements Initializable {
         Sejour chambre = SejourView.getSelectionModel().getSelectedItem();
         this.numchambre = chambre.getNumChambre();
         this.idSejour =chambre.getIdSejour();
+        this.NombreJours =chambre.getNombreJours();
         numChambreTextField.setText(chambre.getNumChambre());
         DateEntrerSejour.setValue(chambre.getDateEntreSejour().toLocalDate());
         NombreJourstextField.setText(String.valueOf(chambre.getNombreJours()));
@@ -155,6 +160,16 @@ public class SejourController implements Initializable {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
 
+            }
+
+
+            String queryUpdate = "UPDATE solde SET SoldeActuel = SoldeActuel - (SELECT PrixNuite FROM chambre WHERE numChambre = ?) * ?";
+            try (PreparedStatement statement = con.prepareStatement(queryUpdate)) {
+                statement.setString(1, this.numchambre );
+                statement.setInt(2, this.NombreJours);
+                statement.execute();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
         }
     }
