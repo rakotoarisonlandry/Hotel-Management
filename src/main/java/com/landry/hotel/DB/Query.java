@@ -70,7 +70,6 @@ public class Query {
         return SoldeList;
     }
 
-
     public ObservableList<com.landry.hotel.Models.Sejour> getSejour(){
         ObservableList<com.landry.hotel.Models.Sejour> SejourList = FXCollections.observableArrayList();
         try{
@@ -135,11 +134,10 @@ public class Query {
         try{
             DBConnection dbConnection =new DBConnection();
             conn= dbConnection.getConnection("hotel","root","");
-            String queryTest = "Select numChambre FROM sejour ";
+            String queryTest = "Select numChambre FROM sejour";
             Statement st = conn.createStatement();
             ResultSet rs =st.executeQuery(queryTest);
             while(rs.next()){
-
                 if (compteRendu.getNumChambre().equals(rs.getString("numChambre"))){
                     i+=1;
                     break;

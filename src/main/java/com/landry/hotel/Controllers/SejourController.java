@@ -121,33 +121,33 @@ public class SejourController implements Initializable {
 //    }
 
     @FXML
-    void GenererPdf(ActionEvent event) throws Exception {
+    public void GenererPdf(ActionEvent event) throws Exception {
         DBConnection dbConnection = new DBConnection();
         con = dbConnection.getConnection("hotel", "root", "");
-        String queryTest = "SELECT idSejour, numChambre, nomClient, nombreJours, dateEntreSejours FROM sejour";
+        String queryTest = "SELECT  DATE_ADD(dateEntreSejour, INTERVAL nombreJours  DAY) as DateSortie  FROM sejour";
 
         Statement st = con.createStatement();
         ResultSet rs = st.executeQuery(queryTest);
 
-        String file_name = "C:\\Users\\Landry Brigea \\ java.pdf";
+        String file_name = "C:\\pdf\\"+numChambreTextField.getText() + ".pdf";
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream(file_name));
         document.open();
-        Paragraph para = new Paragraph("Recus de reservation");
+        Paragraph para = new Paragraph("Recus ");
+        document.add(para);
+        para = new Paragraph("Sejour Numero " + this.idSejour);
+        document.add(para);
+        para = new Paragraph("Nom Client :" + this.NomclientTextField.getText());
+        document.add(para);
+        para = new Paragraph("Designation Chambre : " + this.numchambre);
+        document.add(para);
+        para = new Paragraph("Nombre de Jour : " + NombreJourstextField.getText());
+        document.add(para);
+        para = new Paragraph("Date d'entrée : " + DateEntrerSejour.getValue());
         document.add(para);
         while (rs.next()) {
-            para = new Paragraph("Sejour Numero " + rs.getString("idSejour"));
+            para = new Paragraph("Date de Sortie : " + rs.getString("DateSortie"));
             document.add(para);
-            para = new Paragraph("Nom Client :" + rs.getString("nomClient"));
-            document.add(para);
-            para = new Paragraph("Designation Chambre : " + rs.getString("numChambre"));
-            document.add(para);
-            para = new Paragraph("Nombre de Jour : " + rs.getString("nombreJours"));
-            document.add(para);
-            para = new Paragraph("Date d'entrée : " + rs.getString("dateEntreSejours"));
-            document.add(para);
-//            para = new Paragraph("Date de sortie : " + rs.getString(""));
-//            document.add(para);
         }
         document.close();
     }
