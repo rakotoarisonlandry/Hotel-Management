@@ -208,7 +208,6 @@ public class SejourController implements Initializable {
             catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-
             String queryUpdate2 = "UPDATE solde SET SoldeActuel = SoldeActuel + (SELECT PrixNuite FROM chambre WHERE numChambre = ?) * (? - ?)";
             try (PreparedStatement statement = con.prepareStatement(queryUpdate2)) {
                 statement.setString(1, this.numchambre);
@@ -240,7 +239,6 @@ public class SejourController implements Initializable {
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
-
             }
 
 

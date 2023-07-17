@@ -251,8 +251,9 @@ public class Query {
 //            while(rs1.next()){
 //                JOptionPane.showMessageDialog(null,rs1.getDate("dateReservation") + " "+compteRendu.getDateReservation() );
                 while( rs.next()) {
-                    JOptionPane.showMessageDialog(null,rs.getString("numChambre") + " "+compteRendu.getNumChambre() );
+                    JOptionPane.showMessageDialog(null,rs.getString("numChambre"));
                     if (compteRendu.getNumChambre().equals(rs.getString("numChambre"))/*&& (compteRendu.getDateReservation().equals(rs1.getDate("dateReservation")))*/) {
+
                         i += 1;
                         break;
                     }
