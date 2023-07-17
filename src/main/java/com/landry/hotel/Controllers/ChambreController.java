@@ -79,7 +79,9 @@ public class ChambreController implements Initializable {
 
     @FXML
     public  void  ActuliserButtonChambre(ActionEvent event ) throws  Exception{
+        ContentAllController contentAllController =new ContentAllController();
         showChambreList();
+        contentAllController.Soldeactuel();
     }
 
 //    public  void  RechercheBoutton (ActionEvent event) throws  Exception {

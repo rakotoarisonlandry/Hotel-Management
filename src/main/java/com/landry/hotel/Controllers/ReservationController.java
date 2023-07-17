@@ -33,6 +33,8 @@ public class ReservationController implements Initializable {
     PreparedStatement st ;
     Connection con;
     Integer idReservation;
+
+    Date dateReservation ;
     String numChambre;
     Integer NombreJours;
     public TableView <Reservation> ReservationView;
@@ -64,7 +66,10 @@ public class ReservationController implements Initializable {
 
     @FXML
     public  void  ActuliserButtonChambre(ActionEvent event ) throws  Exception{
+        ContentAllController contentAllController =new ContentAllController();
+
         showReservationList();
+        contentAllController.Soldeactuel();
     }
 
     @FXML
@@ -109,6 +114,7 @@ public class ReservationController implements Initializable {
 
         this.idReservation = reservation.getIdReservation();
         this.numChambre = reservation.getNumChambre();
+        this.dateReservation = reservation.getDateReservation();
         this.NombreJours = reservation.getNombreJours();
         NumChambreTextField.setText(reservation.getNumChambre());
         DateReservation.setValue(reservation.getDateReservation().toLocalDate());
@@ -219,13 +225,14 @@ public class ReservationController implements Initializable {
     public void OnBtnDeletereservation(ActionEvent actionEvent) {
         DBConnection dbConnection = new DBConnection();
         OccuperController controller = new OccuperController();
-        String queryDelete = "DELETE FROM `reservation` WHERE numChambre = ?";
+        String queryDelete = "DELETE FROM `reservation` WHERE numChambre = ? AND dateReservation =?";
         con = dbConnection.getConnection("hotel", "root", "");
         if (controller.confirmation("Modifier")) {
             try {
                 if (this.idReservation != null) {
                     st = con.prepareStatement(queryDelete);
                     st.setString(1, this.numChambre);
+                    st.setDate(2, (java.sql.Date) this.dateReservation);
                     st.executeUpdate();
                     showReservationList();
                 }

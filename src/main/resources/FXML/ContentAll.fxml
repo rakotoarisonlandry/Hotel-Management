@@ -69,7 +69,7 @@
                </children>
             </VBox>
             <Label layoutX="31.0" layoutY="34.0" text="Solde Actuel:" textFill="WHITE" />
-            <Label fx:id="soldeIdLabel" layoutX="119.0" layoutY="34.0" style="-fx-font-size: 15px;" text="  " textFill="WHITE" />
+            <Label fx:id="soldeIdLabel" layoutX="119.0" layoutY="34.0" style="-fx-font-size: 15px;" textFill="WHITE" />
          </children>
       </Pane>
    </left>

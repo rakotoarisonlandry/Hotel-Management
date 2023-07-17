@@ -255,8 +255,10 @@ public class SejourController implements Initializable {
         }
     }
 
-    public  void ActualiserButton(){
+    public  void ActualiserButton() throws  Exception{
+        ContentAllController contentAllController =new ContentAllController();
         showSejourList();
+        contentAllController.Soldeactuel();
     }
     public void showSejourList(){
         Query q= new Query();

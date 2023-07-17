@@ -1,11 +1,17 @@
 package com.landry.hotel.DB;
 
+import com.landry.hotel.Controllers.AjoutReservationController;
 import com.landry.hotel.Controllers.AjoutSejoutController;
 import com.landry.hotel.Controllers.ChambreController;
 import com.landry.hotel.Controllers.ContentAllController;
 import com.landry.hotel.Models.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.util.Properties;
+
 
 import javax.swing.*;
 import java.sql.*;
@@ -32,7 +38,6 @@ public class Query {
         return ReservationList;
     }
 
-
     public ObservableList<com.landry.hotel.Models.Occuper> getOccuperList(){
         ObservableList<com.landry.hotel.Models.Occuper> OccuperList = FXCollections.observableArrayList();
         try{
@@ -43,7 +48,7 @@ public class Query {
             ResultSet rs =st.executeQuery(query);
             Occuper Occuper;
             while(rs.next()){
-                Occuper=new Occuper(rs.getInt("idReservation"),rs.getInt("idOccuper"));
+                Occuper=new Occuper(rs.getInt("idOccuper"),rs.getInt("idReservation"));
                 OccuperList.add(Occuper);
             }
         } catch (SQLException e) {
@@ -97,7 +102,6 @@ public class Query {
             Statement st = conn.createStatement();
             ResultSet rs =st.executeQuery(queryTest);
             while(rs.next()){
-
                 if (compteRendu.getNumChambre().equals(rs.getString("numChambre"))){
                     i+=1;
                     break;
@@ -135,10 +139,12 @@ public class Query {
             DBConnection dbConnection =new DBConnection();
             conn= dbConnection.getConnection("hotel","root","");
             String queryTest = "Select numChambre FROM sejour";
+            String querytest1 ="SELECT dateEntrer FROM `sejour`";
             Statement st = conn.createStatement();
             ResultSet rs =st.executeQuery(queryTest);
+            ResultSet rs1 =st.executeQuery(querytest1);
             while(rs.next()){
-                if (compteRendu.getNumChambre().equals(rs.getString("numChambre"))){
+                if (compteRendu.getNumChambre().equals(rs.getString("numChambre")) && compteRendu.getDateEntreSejour().equals(rs1.getDate("dateEntrer")) ){
                     i+=1;
                     break;
                 }
@@ -170,14 +176,12 @@ public class Query {
                 statement.setString(1, compteRendu.getNumChambre());
                 statement.setInt(2, compteRendu.getNombreJours());
                 statement.execute();
-
                 JOptionPane.showMessageDialog(null,"SuccessFully Added");
             }
             catch (Exception e)
             {
                 e.printStackTrace();
             }
-
         }
 
     }
@@ -197,22 +201,64 @@ public class Query {
         }
     }
 
+    public  void sendEmail(String recipient, String subject, String content) {
+        // Configuration de la session de messagerie
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
+
+        // Informations d'authentification pour le serveur SMTP
+        final String username = "rakotorisonlandry@gmail.com";
+        final String password = "qhwpdzughayzdfkt";
+
+        // Création de la session de messagerie avec l'authentification
+        Session session = Session.getInstance(properties, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+        try {
+            // Création de l'objet Message
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(username));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipient));
+            message.setSubject(subject);
+            message.setText(content);
+
+            // Envoi de l'e-mail
+            Transport.send(message);
+
+            System.out.println("E-mail envoyé avec succès !");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void  setCompteRenduListReservation(Reservation compteRendu){
         Connection conn=null;
         try{
             DBConnection dbConnection =new DBConnection();
             conn= dbConnection.getConnection("hotel","root","");
             String queryTest = "Select numChambre FROM reservation ";
+            String queryTest1 = "SELECT dateReservation  FROM reservation";
+            String querytest3 ="SELECT dateEntrer FROM reservation";
             Statement st = conn.createStatement();
             ResultSet rs =st.executeQuery(queryTest);
-            while(rs.next()){
-
-                if (compteRendu.getNumChambre().equals(rs.getString("numChambre"))){
-                    i+=1;
-                    break;
+            ResultSet rs1 =st.executeQuery(queryTest1);
+//            JOptionPane.showMessageDialog(null,rs1.getString("dateReservation"));
+//            while(rs1.next()){
+//                JOptionPane.showMessageDialog(null,rs1.getDate("dateReservation") + " "+compteRendu.getDateReservation() );
+                while( rs.next()) {
+                    JOptionPane.showMessageDialog(null,rs.getString("numChambre") + " "+compteRendu.getNumChambre() );
+                    if (compteRendu.getNumChambre().equals(rs.getString("numChambre"))/*&& (compteRendu.getDateReservation().equals(rs1.getDate("dateReservation")))*/) {
+                        i += 1;
+                        break;
+                    }
                 }
-            }
-            /**/
+//            }
+
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -226,7 +272,7 @@ public class Query {
                 DBConnection dbConnection = new DBConnection();
                 conn = dbConnection.getConnection("hotel", "root", "");
 
-                String query = "INSERT INTO reservation (idReservation, numChambre, dateReservation, dateEntrer, nombreJours, nomClient, mail) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                String query = "INSERT INTO reservation (idReservation,numChambre, dateReservation, dateEntrer, nombreJours, nomClient, mail) VALUES (?, ?, ?, ?, ?, ?, ?)";
                 PreparedStatement ps = conn.prepareStatement(query);
                 ps.setInt(1, compteRendu.getIdReservation());
                 ps.setString(2, compteRendu.getNumChambre());
@@ -242,8 +288,7 @@ public class Query {
                 statement.setString(1, compteRendu.getNumChambre());
                 statement.setInt(2, compteRendu.getNombreJours());
                 statement.execute();
-                ContentAllController controller = new ContentAllController();
-                controller.Soldeactuel();
+
 
                 JOptionPane.showMessageDialog(null,"ajouter avec succes!!!");
             } catch (Exception e) {

@@ -70,14 +70,12 @@ public class ContentAllController implements Initializable {
     try {
         DBConnection dbConnection = new DBConnection();
         con = dbConnection.getConnection("hotel", "root", "");
-        ResultSet rs = con.createStatement().executeQuery("SELECT `SoldeActuel` FROM solde");
+        ResultSet rs = con.createStatement().executeQuery("SELECT `SoldeActuel` FROM solde where idSolde =1");
 
         if (rs.next()) {
             double soldeActuel = rs.getDouble(1); // Récupérer le résultat en tant que double
-            soldeIdLabel.setText(String.valueOf(soldeActuel)); // Convertir le double en chaîne de caractères pour l'affichage
+            soldeIdLabel.setText(String.valueOf(soldeActuel)+" Ariary"); // Convertir le double en chaîne de caractères pour l'affichage
         }
-        
-        
     } catch (Exception e) {
         e.printStackTrace();
     }

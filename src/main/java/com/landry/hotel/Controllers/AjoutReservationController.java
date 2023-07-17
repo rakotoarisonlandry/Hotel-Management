@@ -47,7 +47,14 @@ public class AjoutReservationController implements Initializable {
     public void AddNewReservation(ActionEvent event) throws Exception {
         Reservation compteRendu =new Reservation(0, NumChambreTextfield.getText(), Date.valueOf(DateEntrerReservation.getValue()), Date.valueOf(DateEntrer.getValue()),Integer.parseInt(NombreJours.getText()),NomClient.getText(),mail.getText());
         Query query =new Query();
+        String recipient = mail.getText();
+        String subject = "Bienvenue sur Hotel_Luxe";
+        String content = "Informarions :\n" +
+                "Chambre Occupé :" +NumChambreTextfield.getText() +"\n"+ "Date Entrer : "
+                + DateEntrerReservation.getValue()+ "\n"+ "Nombre de jours : " + NombreJours.getText() +"\n" + "Merci de Choisir le Luxe" ;
+
         query.setCompteRenduListReservation(compteRendu);
+        query.sendEmail(recipient , subject ,content);
         BackButton(event);
     }
 

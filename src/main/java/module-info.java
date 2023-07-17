@@ -6,6 +6,7 @@ module com.landry.hotel {
     requires mysql.connector.java;
     requires java.desktop;
     requires itextpdf;
+    requires javax.mail.api;
 
     opens com.landry.hotel to javafx.fxml;
     exports com.landry.hotel;

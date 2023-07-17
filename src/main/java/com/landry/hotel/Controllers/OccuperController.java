@@ -56,7 +56,9 @@ public class OccuperController implements Initializable {
     }
     @FXML
     public void  ActionActualiser(ActionEvent event) throws  Exception{
+        ContentAllController contentAllController =new ContentAllController();
         showOccuperList();
+        contentAllController.Soldeactuel();
     }
     public void showOccuperList(){
         Query q= new Query();
