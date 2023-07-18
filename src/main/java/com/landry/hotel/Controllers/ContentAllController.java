@@ -27,7 +27,7 @@
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {
             try {
-                Soldeactuel(soldeIdLabel);
+                Soldeactuel();
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -39,7 +39,10 @@
             }catch (IOException ex){
                 Logger.getLogger(ContentAllController.class.getName()).log(Level.SEVERE ,null,ex);
             }
+
         }
+
+
 
         public  void Chambre (javafx.event.ActionEvent actionEvent) throws  IOException{
             Parent fxml =FXMLLoader.load(getClass().getResource("/FXML/Chambre.fxml"));
@@ -88,7 +91,7 @@
     //        }
     //    }
 
-        public String Soldeactuel(Label soldeIdLabel) throws SQLException {
+        public double Soldeactuel() throws SQLException {
             Connection conn = null;
             try {
                 DBConnection dbConnection = new DBConnection();
@@ -97,11 +100,7 @@
                 ResultSet rs = conn.createStatement().executeQuery("SELECT `SoldeActuel` FROM solde WHERE idSolde = 1");
 
                 if (rs.next()) {
-                    double soldeActuel = rs.getDouble("SoldeActuel");
-                    String soldeText = String.valueOf(soldeActuel) + " Ariary";
-                     soldeIdLabel.setText(soldeText);
-                    // System.out.println(soldeText);
-                    return soldeText;
+                    return rs.getDouble("SoldeActuel");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -110,9 +109,8 @@
                     conn.close();
                 }
             }
-            return null; // Ajout d'un retour par défaut au cas où aucun solde n'est trouvé
+            return 0.0; // Ajout d'un retour par défaut au cas où aucun solde n'est trouvé
         }
-
 
 //        public void Soldeactuel(Label soldeIdLabel) throws SQLException {
 //            Connection conn = null;

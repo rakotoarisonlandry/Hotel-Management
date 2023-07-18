@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="573.0" prefWidth="548.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.landry.hotel.Controllers.AjoutReservationController">
+<AnchorPane prefHeight="610.0" prefWidth="548.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.landry.hotel.Controllers.AjoutReservationController">
    <children>
-      <Pane layoutX="84.0" layoutY="24.0" prefHeight="522.0" prefWidth="389.0">
+      <Pane layoutX="84.0" layoutY="24.0" prefHeight="559.0" prefWidth="389.0">
          <children>
             <Label layoutX="14.0" layoutY="33.0" text="Numero Chambre:">
                <font>

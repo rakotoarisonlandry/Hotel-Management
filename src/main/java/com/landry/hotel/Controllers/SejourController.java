@@ -76,7 +76,7 @@ public class SejourController implements Initializable {
             Parent root  = FXMLLoader.load(getClass().getResource("/FXML/AjoutSejour.fxml"));
             Stage primarystage = new Stage();
             primarystage.initStyle(StageStyle.UNDECORATED);
-            primarystage.setScene(new Scene(root ,490,477));
+            primarystage.setScene(new Scene(root ,548,610));
             primarystage.show();
         }
         catch (Exception e ){
@@ -84,41 +84,6 @@ public class SejourController implements Initializable {
             e.getCause();
         }
     }
-
-//    @FXML
-//    void relever(ActionEvent event) throws FileNotFoundException, DocumentException, ClassNotFoundException, SQLException {
-//        DBConnection dbConnection =new DBConnection();
-//        con= dbConnection.getConnection("hotel","root","");
-//        String queryTest = "Select numChambre FROM sejour ";
-//
-//        Statement st = con.createStatement();
-//        ResultSet rs =st.executeQuery(queryTest);
-//
-//
-//        String file_name = "C:\\Users\\Landry Brigea.pdf";
-//        Document document = new Document();
-//        PdfWriter.getInstance(document,new FileOutputStream(file_name));
-//        document.open();
-//        Paragraph para = new Paragraph("Recus de reservation");
-//        document.add(para);
-//        while (rs.next()){
-//            para = new Paragraph("Annee Scolaire : 2022-2023" );
-//            document.add(para);
-//            para = new Paragraph("Sejour Numero " + rs.getString("idSejour"));
-//            document.add(para);
-//            para = new Paragraph("Nom Client :" + rs.getString("nomClient"));
-//            document.add(para);
-//            para = new Paragraph("Designation Chambre : " + rs.getString("numChambre"));
-//            document.add(para);
-//            para = new Paragraph("Nombre de Jour : " + rs.getString("nombreJours"));
-//            document.add(para);
-//            para = new Paragraph("Date d'entrée : " + rs.getString("dateEntreSejours"));
-//            document.add(para);
-////            para = new Paragraph("Date de sortie : " + rs.getString(""));
-////            document.add(para);
-//        }
-//        document.close();
-//    }
 
     @FXML
     public void GenererPdf(ActionEvent event) throws Exception {
@@ -256,19 +221,20 @@ public class SejourController implements Initializable {
 
     public  void ActualiserButton() throws  Exception{
         showSejourList();
-        ContentAllController contentAllController = new ContentAllController();
-        Label soldeIdLabel = new Label(); // Créez une instance de Label pour l'utiliser comme argument
-
-        try {
-            contentAllController.Soldeactuel(soldeIdLabel);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-// Utilisez la valeur mise à jour dans soldeIdLabel
-        String soldeText = soldeIdLabel.getText();
-        System.out.println("Solde actuel : " + soldeText);
-
+//        ContentAllController contentAllController = new ContentAllController();
+//        Label soldeIdLabel = new Label(); // Créez une instance de Label pour l'utiliser comme argument
+//
+//        try {
+//            contentAllController.Soldeactuel(soldeIdLabel);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//// Utilisez la valeur mise à jour dans soldeIdLabel
+//        String soldeText = soldeIdLabel.getText();
+//        System.out.println("Solde actuel : " + soldeText);
+        ReservationController rs = new ReservationController();
+        rs.mettreAJourSoldeLabel();
     }
     public void showSejourList(){
         Query q= new Query();

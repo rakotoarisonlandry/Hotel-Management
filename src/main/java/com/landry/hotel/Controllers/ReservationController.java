@@ -1,4 +1,6 @@
-    package com.landry.hotel.Controllers;
+
+
+package com.landry.hotel.Controllers;
 
     import  com.landry.hotel.DB.DBConnection;
     import com.landry.hotel.DB.Query;
@@ -9,6 +11,8 @@
     import javafx.fxml.FXML;
     import javafx.fxml.FXMLLoader;
     import javafx.scene.control.Label;
+
+
     import javafx.fxml.Initializable;
     import javafx.scene.Parent;
     import javafx.scene.Scene;
@@ -29,7 +33,11 @@
     import java.util.ResourceBundle;
 
     public class ReservationController implements Initializable {
-
+//        private ContentAllController contentAllController;
+//
+//        public ReservationController(ContentAllController contentAllController) {
+//            this.contentAllController = contentAllController;
+//        }
 
         PreparedStatement st ;
         Connection con;
@@ -46,8 +54,6 @@
         public TableColumn <Reservation,Integer> colNbJour;
         public TableColumn <Reservation,String>colNom;
         public TableColumn <Reservation,String> colMail;
-
-        private ContentAllController contentAllController;
 
         @FXML
         public Button ajout;
@@ -67,9 +73,7 @@
         @FXML
         public TextField MailClientTextField;
 
-        public void setContentAllController(ContentAllController contentAllController) {
-            this.contentAllController = contentAllController;
-        }
+
 
 
 
@@ -79,7 +83,7 @@
                 Parent root  = FXMLLoader.load(getClass().getResource("/FXML/AjoutReservation.fxml"));
                 Stage primarystage = new Stage();
                 primarystage.initStyle(StageStyle.UNDECORATED);
-                primarystage.setScene(new Scene(root ,490,477));
+                primarystage.setScene(new Scene(root ,548,610));
                 primarystage.show();
             }
             catch (Exception e ){
@@ -181,20 +185,27 @@
             }
         }
 
+
     @FXML
     public void ActuliserButtonChambre(ActionEvent event) throws Exception {
         showReservationList();
-
-        ContentAllController soldeManager = new ContentAllController();
-        Label soldeLabel = new Label();
-
-        try {
-            String soldeActuel = soldeManager.Soldeactuel(soldeLabel);
-            soldeLabel.setText(soldeActuel);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        mettreAJourSoldeLabel();
     }
+
+
+        public void mettreAJourSoldeLabel() {
+            ContentAllController soldeManager = new ContentAllController();
+            Label soldeLabel = new Label();
+
+            try {
+                double soldeActuel = soldeManager.Soldeactuel();
+                String soldeText = String.valueOf(soldeActuel) + " Ariary";
+                soldeLabel.setText(soldeText);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
         public void OnBtnDeletereservation(ActionEvent actionEvent) {
             DBConnection dbConnection = new DBConnection();
             OccuperController controller = new OccuperController();

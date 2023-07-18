@@ -82,19 +82,20 @@ public class ChambreController implements Initializable {
     @FXML
     public  void  ActuliserButtonChambre(ActionEvent event ) throws  Exception{
         showChambreList();
-        ContentAllController contentAllController = new ContentAllController();
-        Label soldeIdLabel = new Label(); // Créez une instance de Label pour l'utiliser comme argument
-
-        try {
-            contentAllController.Soldeactuel(soldeIdLabel);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-// Utilisez la valeur mise à jour dans soldeIdLabel
-        String soldeText = soldeIdLabel.getText();
-        System.out.println("Solde actuel : " + soldeText);
-
+//        ContentAllController contentAllController = new ContentAllController();
+//        Label soldeIdLabel = new Label(); // Créez une instance de Label pour l'utiliser comme argument
+//
+//        try {
+//            contentAllController.Soldeactuel(soldeIdLabel);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//// Utilisez la valeur mise à jour dans soldeIdLabel
+//        String soldeText = soldeIdLabel.getText();
+//        System.out.println("Solde actuel : " + soldeText);
+//        ReservationController rs = new ReservationController();
+//        rs.mettreAJourSoldeLabel();
     }
 
 //    public  void  RechercheBoutton (ActionEvent event) throws  Exception {
@@ -200,14 +201,13 @@ public class ChambreController implements Initializable {
         try {
             DBConnection dbConnection = new DBConnection();
             Connection conn = dbConnection.getConnection("hotel", "root", "");
-            String query = "SELECT * FROM chambre c " +
-                    "LEFT JOIN reservation rs ON c.numChambre = rs.numChambre " +
-                    "WHERE (rs.numChambre IS NULL OR NOT (rs.dateReservation BETWEEN ? AND DATE_ADD(?, INTERVAL rs.nombreJours DAY)))";
+            String query = "SELECT * FROM chambre c LEFT JOIN reservation rs ON c.numChambre = rs.numChambre WHERE (rs.numChambre IS NULL OR NOT (rs.dateReservation BETWEEN ? AND DATE_ADD((SELECT rs.dateEntrer WHERE rs.dateReservation= ?) , INTERVAL (SELECT rs.nombreJours WHERE rs.dateEntrer =(SELECT rs.dateEntrer WHERE rs.dateReservation= ?))  DAY)))";
 
             PreparedStatement st = conn.prepareStatement(query);
             if (DateRecherche != null) {
                 st.setDate(1, Date.valueOf(DateRecherche.getValue()));
                 st.setDate(2, Date.valueOf(DateRecherche.getValue()));
+                st.setDate(3, Date.valueOf(DateRecherche.getValue()));
             }
             ResultSet rs = st.executeQuery();
             while (rs.next()) {

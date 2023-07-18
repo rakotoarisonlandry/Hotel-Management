@@ -26,8 +26,6 @@
             <TableColumn fx:id="colMail" prefWidth="90.3333740234375" text="mail" />
          </columns>
       </TableView>
-      <Button layoutX="647.0" layoutY="125.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="96.0" text="Button" />
-      <TextField layoutX="389.0" layoutY="126.0" prefHeight="25.0" prefWidth="236.0" />
       <Button fx:id="ButtonMiseAJours" disable="true" layoutX="773.0" layoutY="632.0" mnemonicParsing="false" onAction="#OnUpdateButton" prefHeight="25.0" prefWidth="300.0" text="Mettre a Jours" />
       <Button layoutX="58.0" layoutY="632.0" mnemonicParsing="false" onAction="#OnBtnDeletereservation" prefHeight="25.0" prefWidth="331.0" text="Supprimer" />
       <Button layoutX="416.0" layoutY="632.0" mnemonicParsing="false" onAction="#ActuliserButtonChambre" prefHeight="25.0" prefWidth="331.0" text="Actualiser" />

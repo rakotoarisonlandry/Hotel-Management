@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane fx:id="contenuChambre" prefHeight="559.0" prefWidth="509.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.landry.hotel.Controllers.AjoutChambreController">
+<Pane fx:id="contenuChambre" prefHeight="559.0" prefWidth="509.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.landry.hotel.Controllers.AjoutChambreController">
    <children>
       <Pane layoutX="69.0" layoutY="26.0" prefHeight="495.0" prefWidth="387.0">
          <children>

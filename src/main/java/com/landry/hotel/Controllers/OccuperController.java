@@ -57,19 +57,20 @@ public class OccuperController implements Initializable {
     @FXML
     public void  ActionActualiser(ActionEvent event) throws  Exception{
         showOccuperList();
-        ContentAllController contentAllController = new ContentAllController();
-        Label soldeIdLabel = new Label(); // Créez une instance de Label pour l'utiliser comme argument
-
-        try {
-            contentAllController.Soldeactuel(soldeIdLabel);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-// Utilisez la valeur mise à jour dans soldeIdLabel
-        String soldeText = soldeIdLabel.getText();
-        System.out.println("Solde actuel : " + soldeText);
-
+//        ContentAllController contentAllController = new ContentAllController();
+//        Label soldeIdLabel = new Label(); // Créez une instance de Label pour l'utiliser comme argument
+//
+//        try {
+//            contentAllController.Soldeactuel(soldeIdLabel);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//// Utilisez la valeur mise à jour dans soldeIdLabel
+//        String soldeText = soldeIdLabel.getText();
+//        System.out.println("Solde actuel : " + soldeText);
+        ReservationController rs = new ReservationController();
+        rs.mettreAJourSoldeLabel();
     }
     public void showOccuperList(){
         Query q= new Query();
@@ -97,7 +98,6 @@ public class OccuperController implements Initializable {
         con = dbConnection.getConnection("hotel","root","");
         try {
             if (this.idReservation != null){
-
                 st= con.prepareStatement(queryDeleteChmabre);
                 st.setInt(1, Integer.parseInt(idReservationTextfield.getText()));
                 st.setInt(2,this.idOccuper);
