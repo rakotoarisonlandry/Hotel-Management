@@ -27,7 +27,7 @@ public class ContentAllController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            Soldeactuel();
+            Soldeactuel(soldeIdLabel);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -65,20 +65,53 @@ public class ContentAllController implements Initializable {
         ContentArea.getChildren().removeAll();
         ContentArea.getChildren().setAll(fxml);
     }
+//    public void Soldeactuel(Label soldeIdLabel) throws SQLException {
+//        Connection conn = null;
+//        try {
+//            DBConnection dbConnection = new DBConnection();
+//            conn = dbConnection.getConnection("hotel", "root", "");
+//
+//            ResultSet rs = conn.createStatement().executeQuery("SELECT `SoldeActuel` FROM solde WHERE idSolde = 1");
+//
+//            if (rs.next()) {
+//                double soldeActuel = rs.getDouble(1); // Récupérer le résultat en tant que double
+//                System.out.println(soldeActuel);
+//                soldeIdLabel.setText(String.valueOf(soldeActuel) + " Ariary"); // Convertir le double en chaîne de caractères pour l'affichage
+//                System.out.println(soldeIdLabel);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            // Fermer la connexion
+//            if (conn != null) {
+//                conn.close();
+//            }
+//        }
+//    }
 
-  public void Soldeactuel() throws SQLException {
-    try {
-        DBConnection dbConnection = new DBConnection();
-        con = dbConnection.getConnection("hotel", "root", "");
-        ResultSet rs = con.createStatement().executeQuery("SELECT `SoldeActuel` FROM solde where idSolde =1");
+    public void Soldeactuel(Label soldeIdLabel) throws SQLException {
+        Connection conn = null;
+        try {
+            DBConnection dbConnection = new DBConnection();
+            conn = dbConnection.getConnection("hotel", "root", "");
 
-        if (rs.next()) {
-            double soldeActuel = rs.getDouble(1); // Récupérer le résultat en tant que double
-            soldeIdLabel.setText(String.valueOf(soldeActuel)+" Ariary"); // Convertir le double en chaîne de caractères pour l'affichage
+            ResultSet rs = conn.createStatement().executeQuery("SELECT `SoldeActuel` FROM solde WHERE idSolde = 1");
+
+            if (rs.next()) {
+                double soldeActuel = rs.getDouble(1); // Récupérer le résultat en tant que double
+                System.out.println(soldeActuel);
+                soldeIdLabel.textProperty().set(String.valueOf(soldeActuel) + " Ariary"); // Modifier la propriété text de soldeIdLabel
+                System.out.println(soldeIdLabel);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Fermer la connexion
+            if (conn != null) {
+                conn.close();
+            }
         }
-    } catch (Exception e) {
-        e.printStackTrace();
     }
-}
+
 }
 

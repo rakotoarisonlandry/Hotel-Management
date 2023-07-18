@@ -54,7 +54,7 @@ public class AjoutReservationController implements Initializable {
                 + DateEntrerReservation.getValue()+ "\n"+ "Nombre de jours : " + NombreJours.getText() +"\n" + "Merci de Choisir le Luxe" ;
 
         query.setCompteRenduListReservation(compteRendu);
-        query.sendEmail(recipient , subject ,content);
+//        query.sendEmail(recipient , subject ,content);
         BackButton(event);
     }
 

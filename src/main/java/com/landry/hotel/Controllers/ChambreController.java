@@ -79,9 +79,20 @@ public class ChambreController implements Initializable {
 
     @FXML
     public  void  ActuliserButtonChambre(ActionEvent event ) throws  Exception{
-        ContentAllController contentAllController =new ContentAllController();
         showChambreList();
-        contentAllController.Soldeactuel();
+        ContentAllController contentAllController = new ContentAllController();
+        Label soldeIdLabel = new Label(); // Créez une instance de Label pour l'utiliser comme argument
+
+        try {
+            contentAllController.Soldeactuel(soldeIdLabel);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+// Utilisez la valeur mise à jour dans soldeIdLabel
+        String soldeText = soldeIdLabel.getText();
+        System.out.println("Solde actuel : " + soldeText);
+
     }
 
 //    public  void  RechercheBoutton (ActionEvent event) throws  Exception {
