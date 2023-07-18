@@ -62,6 +62,8 @@ public class ChambreController implements Initializable {
     public  Button Actualiserbutton;
     public AnchorPane HBoxChambreList;
     public String numChambre;
+    private Label soldeIdLabel; // Déclaration de la variable d'instance
+
     @FXML
     public void ActionAjouterChambreButton(ActionEvent actionEvent) throws Exception{
         try {
