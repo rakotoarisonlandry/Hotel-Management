@@ -8,6 +8,7 @@
     import javafx.event.ActionEvent;
     import javafx.fxml.FXML;
     import javafx.fxml.FXMLLoader;
+    import javafx.scene.control.Label;
     import javafx.fxml.Initializable;
     import javafx.scene.Parent;
     import javafx.scene.Scene;
@@ -70,18 +71,7 @@
             this.contentAllController = contentAllController;
         }
 
-        @FXML
-        public void ActuliserButtonChambre(ActionEvent event) throws Exception {
-            showReservationList();
 
-            try {
-                contentAllController.Soldeactuel(soldeIdLabel);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-            String soldeText = soldeIdLabel.getText();
-        }
 
         @FXML
         public void ajoutbutton(ActionEvent actionEvent) throws Exception{
@@ -190,49 +180,21 @@
                 }
             }
         }
-    //    public void OnBtnDeletereservation(ActionEvent actionEvent) {
-    //
-    //        DBConnection dbConnection =new DBConnection();
-    //        OccuperController controller = new OccuperController();
-    //        String queryDelete ="Delete from `reservation` where numChambre= ?";
-    //        con = dbConnection.getConnection("hotel","root","");
-    //        if (controller.confirmation("Modifier")) {
-    //            try {
-    //                if (this.idReservation != null) {
-    //                    st = con.prepareStatement(queryDelete);
-    //                    st.setString(1, this.numChambre);
-    //                    st.executeUpdate();
-    //                    showReservationList();
-    //                }
-    //            } catch (SQLException e) {
-    //                throw new RuntimeException(e);
-    //            }
-    //
-    //            String queryUpdate = "UPDATE solde SET SoldeActuel = SoldeActuel -(SELECT PrixNuite FROM chambre WHERE numChambre = ?) * ?";
-    //            PreparedStatement statement = null;
-    //            try {
-    //                statement = con.prepareStatement(queryUpdate);
-    //            } catch (SQLException e) {
-    //                throw new RuntimeException(e);
-    //            }
-    //            try {
-    //                statement.setString(1, this.numChambre);
-    //            } catch (SQLException e) {
-    //                throw new RuntimeException(e);
-    //            }
-    //            try {
-    //                statement.setInt(2, this.NombreJours);
-    //            } catch (SQLException e) {
-    //                throw new RuntimeException(e);
-    //            }
-    //            try {
-    //                statement.execute();
-    //            } catch (SQLException e) {
-    //                throw new RuntimeException(e);
-    //            }
-    //        }
-    //    }
 
+    @FXML
+    public void ActuliserButtonChambre(ActionEvent event) throws Exception {
+        showReservationList();
+
+        ContentAllController soldeManager = new ContentAllController();
+        Label soldeLabel = new Label();
+
+        try {
+            String soldeActuel = soldeManager.Soldeactuel(soldeLabel);
+            soldeLabel.setText(soldeActuel);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
         public void OnBtnDeletereservation(ActionEvent actionEvent) {
             DBConnection dbConnection = new DBConnection();
             OccuperController controller = new OccuperController();

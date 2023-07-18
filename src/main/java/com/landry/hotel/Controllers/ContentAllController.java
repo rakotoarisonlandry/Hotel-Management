@@ -32,7 +32,6 @@
                 throw new RuntimeException(e);
             }
 
-
             try {
                 Parent fxml  = FXMLLoader.load(getClass().getResource("/FXML/Chambre.fxml"));
                 ContentArea.getChildren().removeAll();
@@ -89,7 +88,7 @@
     //        }
     //    }
 
-        public void Soldeactuel(Label soldeIdLabel) throws SQLException {
+        public String Soldeactuel(Label soldeIdLabel) throws SQLException {
             Connection conn = null;
             try {
                 DBConnection dbConnection = new DBConnection();
@@ -100,8 +99,9 @@
                 if (rs.next()) {
                     double soldeActuel = rs.getDouble("SoldeActuel");
                     String soldeText = String.valueOf(soldeActuel) + " Ariary";
-                    soldeIdLabel.setText(soldeText);
-                    System.out.println(soldeText);
+                     soldeIdLabel.setText(soldeText);
+                    // System.out.println(soldeText);
+                    return soldeText;
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -110,7 +110,9 @@
                     conn.close();
                 }
             }
+            return null; // Ajout d'un retour par défaut au cas où aucun solde n'est trouvé
         }
+
 
 //        public void Soldeactuel(Label soldeIdLabel) throws SQLException {
 //            Connection conn = null;
