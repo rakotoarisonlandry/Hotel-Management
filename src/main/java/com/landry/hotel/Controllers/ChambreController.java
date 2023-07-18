@@ -82,133 +82,21 @@ public class ChambreController implements Initializable {
     @FXML
     public  void  ActuliserButtonChambre(ActionEvent event ) throws  Exception{
         showChambreList();
-//        ContentAllController contentAllController = new ContentAllController();
-//        Label soldeIdLabel = new Label(); // Créez une instance de Label pour l'utiliser comme argument
-//
-//        try {
-//            contentAllController.Soldeactuel(soldeIdLabel);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//// Utilisez la valeur mise à jour dans soldeIdLabel
-//        String soldeText = soldeIdLabel.getText();
-//        System.out.println("Solde actuel : " + soldeText);
-//        ReservationController rs = new ReservationController();
-//        rs.mettreAJourSoldeLabel();
     }
-
-//    public  void  RechercheBoutton (ActionEvent event) throws  Exception {
-//
-//        ObservableList<com.landry.hotel.Models.Chambre> ChambreList = FXCollections.observableArrayList();
-//
-//        try {
-//            DBConnection dbConnection = new DBConnection();
-//            conn = dbConnection.getConnection("hotel", "root", "");
-//            String query = "SELECT * FROM chambre c LEFT JOIN reservation rs ON c.numChambre = rs.numChambre LEFT JOIN sejour sj ON c.numChambre = sj.numChambre WHERE rs.numChambre IS NULL OR NOT (rs.dateReservation BETWEEN ? AND DATE_ADD(?, INTERVAL rs.nombreJours DAY))";
-//            PreparedStatement st = conn.prepareStatement(query);
-//            st.setDate(1, Date.valueOf(chambreController.DateRecherche.getValue()));
-//            ResultSet rs = st.executeQuery();
-//            while (rs.next()) {
-//                com.landry.hotel.Models.Chambre chambre = new com.landry.hotel.Models.Chambre(rs.getString("numChambre"), rs.getString("Designation"), rs.getString("Type"), rs.getInt("PrixNuite"));
-//                ChambreList.add(chambre);
-//            }
-//            rs.close();
-//            st.close();
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        } finally {
-//            if (conn != null) {
-//                try {
-//                    conn.close();
-//                } catch (SQLException e) {
-//                    throw new RuntimeException(e);
-//                }
-//            }
-//        }
-//        try{
-//            ColInumchambre.setCellValueFactory(new PropertyValueFactory<Chambre, String>("numChambre"));
-//            colDesignation.setCellValueFactory(new PropertyValueFactory<Chambre,String >("Designation"));
-//            coltype.setCellValueFactory(new PropertyValueFactory<Chambre, String>("Type"));
-//            colPrixnuite.setCellValueFactory(new PropertyValueFactory<Chambre, Integer>("PrixNuite"));
-//            ChambreView.setItems(ChambreList);
-//        }catch(Exception e){
-//            e.printStackTrace();
-//        }
-//    }
-
-//    public void RechercheBoutton(ActionEvent event) throws Exception {
-//        ObservableList<com.landry.hotel.Models.Chambre> ChambreList = FXCollections.observableArrayList();
-//        try {
-//            DBConnection dbConnection = new DBConnection();
-//            con = dbConnection.getConnection("hotel", "root", "");
-//            String query = "SELECT * FROM chambre c LEFT JOIN reservation rs ON c.numChambre = rs.numChambre WHERE rs.numChambre IS NULL OR NOT ((rs.dateReservation BETWEEN ? AND DATE_ADD(?, INTERVAL rs.nombreJours DAY))) " +
-//                    "UNION ALL " +
-//                    "SELECT * FROM chambre c LEFT JOIN sejour sj ON c.numChambre = sj.numChambre WHERE sj.numChambre IS NULL OR NOT ((sj.dateEntreSejour BETWEEN ? AND DATE_ADD(?, INTERVAL sj.nombreJours DAY)))";
-//
-//            PreparedStatement st = con.prepareStatement(query);
-//            if (DateRecherche != null) {
-//                st.setDate(1, Date.valueOf(DateRecherche.getValue()));
-//                st.setDate(2, Date.valueOf(DateRecherche.getValue()));
-//                st.setDate(3, Date.valueOf(DateRecherche.getValue()));
-//                st.setDate(4, Date.valueOf(DateRecherche.getValue()));
-//            }
-//            ResultSet rs = st.executeQuery();
-//            while (rs.next()) {
-//                com.landry.hotel.Models.Chambre chambre = new com.landry.hotel.Models.Chambre(rs.getString("numChambre"), rs.getString("Designation"), rs.getString("Type"), rs.getInt("PrixNuite"));
-//                ChambreList.add(chambre);
-//            }
-//            rs.close();
-//            st.close();
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        } finally {
-//            if (con!= null) {
-//                try {
-//                    con.close();
-//                } catch (SQLException e) {
-//                    throw new RuntimeException(e);
-//                }
-//            }
-//        }
-//        try {
-//            ColInumchambre.setCellValueFactory(new PropertyValueFactory<>("numChambre"));
-//            colDesignation.setCellValueFactory(new PropertyValueFactory<>("Designation"));
-//            coltype.setCellValueFactory(new PropertyValueFactory<>("Type"));
-//            colPrixnuite.setCellValueFactory(new PropertyValueFactory<>("PrixNuite"));
-//            ChambreView.setItems(ChambreList);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public void showChambreList(){
-//        Query q= new Query();
-//        ObservableList<Chambre> list = q.getChambre();
-//        try{
-//            ColInumchambre.setCellValueFactory(new PropertyValueFactory<Chambre, String>("numChambre"));
-//            colDesignation.setCellValueFactory(new PropertyValueFactory<Chambre,String >("Designation"));
-//            coltype.setCellValueFactory(new PropertyValueFactory<Chambre, String>("Type"));
-//            colPrixnuite.setCellValueFactory(new PropertyValueFactory<Chambre, Integer>("PrixNuite"));
-//            ChambreView.setItems(list);
-//        }catch(Exception e){
-//            e.printStackTrace();
-//        }
-//    }
 
     public void RechercheBoutton(ActionEvent event) throws Exception {
         ObservableList<com.landry.hotel.Models.Chambre> ChambreList = FXCollections.observableArrayList();
         try {
             DBConnection dbConnection = new DBConnection();
             Connection conn = dbConnection.getConnection("hotel", "root", "");
-            String query = "SELECT * FROM chambre c LEFT JOIN reservation rs ON c.numChambre = rs.numChambre WHERE (rs.numChambre IS NULL OR NOT (rs.dateReservation BETWEEN ? AND DATE_ADD((SELECT rs.dateEntrer WHERE rs.dateReservation= ?) , INTERVAL (SELECT rs.nombreJours WHERE rs.dateEntrer =(SELECT rs.dateEntrer WHERE rs.dateReservation= ?))  DAY)))";
-
+            String query = "SELECT * FROM chambre c LEFT JOIN reservation rs ON c.numChambre = rs.numChambre WHERE (rs.numChambre IS NULL OR NOT (rs.dateEntrer BETWEEN ? AND DATE_ADD(? , INTERVAL (SELECT rs.nombreJours WHERE rs.dateEntrer =?)  DAY)))";
             PreparedStatement st = conn.prepareStatement(query);
             if (DateRecherche != null) {
                 st.setDate(1, Date.valueOf(DateRecherche.getValue()));
                 st.setDate(2, Date.valueOf(DateRecherche.getValue()));
                 st.setDate(3, Date.valueOf(DateRecherche.getValue()));
             }
+
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 com.landry.hotel.Models.Chambre chambre = new com.landry.hotel.Models.Chambre(rs.getString("numChambre"), rs.getString("Designation"), rs.getString("Type"), rs.getInt("PrixNuite"));

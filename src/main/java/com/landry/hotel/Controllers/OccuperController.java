@@ -90,10 +90,8 @@ public class OccuperController implements Initializable {
         this.idOccuper = Selecte.getIdOccuper();
         idReservationTextfield.setText(String.valueOf(Selecte.getIdReservation()));
     }
-
     public  void OnUpdateoccuper(ActionEvent event) throws  Exception{
         DBConnection dbConnection =new DBConnection();
-
         String queryDeleteChmabre ="Update`occuper` set idReservation=? where  idOccuper= ?";
         con = dbConnection.getConnection("hotel","root","");
         try {
@@ -115,13 +113,13 @@ public class OccuperController implements Initializable {
 
         DBConnection dbConnection =new DBConnection();
 
-        String queryDeleteChmabre ="Delete from `chambre` where = ?";
+        String queryDeleteChmabre ="Delete from `occuper` where  idOccuper=? ";
         con = dbConnection.getConnection("hotel","root","");
         try {
             if (this.idReservation != null){
 
                 st= con.prepareStatement(queryDeleteChmabre);
-                st.setInt(1,this.idReservation);
+                st.setInt(1,this.idOccuper);
                 st.executeUpdate();
             }
         }
@@ -133,7 +131,6 @@ public class OccuperController implements Initializable {
         con = dbConnection.getConnection("hotel","root","");
         try {
             if (this.idReservation != null){
-
                 st= con.prepareStatement(queryDelete);
                 st.setInt(1,this.idReservation);
                 st.executeUpdate();

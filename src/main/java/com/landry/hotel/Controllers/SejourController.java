@@ -160,7 +160,7 @@ public class SejourController implements Initializable {
             try {
                 if (this.numchambre != null){
                     st = con.prepareStatement(queryDelete);
-                    st.setString(1,this.numchambre);
+                    st.setString(1,numChambreTextField.getText());
                     st.setDate(2, java.sql.Date.valueOf(DateEntrerSejour.getValue()));
                     st.setInt(3, Integer.parseInt(NombreJourstextField.getText()));
                     st.setString(4,this.NomclientTextField.getText());

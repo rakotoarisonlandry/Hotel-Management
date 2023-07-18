@@ -166,7 +166,15 @@ package com.landry.hotel.Controllers;
                     ClearANDactive();
                     st.executeUpdate();
                     showReservationList();
-
+//
+//                    String recipient = MailClientTextField.getText();
+//                    String subject = " Bienvenue sur Hotel_Luxe";
+//                    String content = " Bonjour Mr/md" +NomClientTextField.getText()+"\n"+ " je tiens a vous informez ces informations :\n" +
+//                            "Chambre Occupé :" +NumChambreTextField.getText() +"\n"+ "Date Entrer : "
+//                            + DateEntrer.getValue()+ "\n"+ "Nombre de jours : " + NombreJoursTextField.getText() +"\n" + "Merci de Choisir le Luxe" ;
+//
+//                    Query query =new Query();
+//                    query.sendEmail(recipient , subject ,content);
                 }
             }
             catch (SQLException e) {

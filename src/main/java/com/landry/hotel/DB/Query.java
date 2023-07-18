@@ -365,14 +365,15 @@ public void setCompteRenduListSejour(Sejour compteRendu) {
             DBConnection dbConnection = new DBConnection();
             conn = dbConnection.getConnection("hotel", "root", "");
             // Check if the room is already occupied
-            String queryCheck = "SELECT COUNT(*) AS count FROM reservation WHERE dateReservation = ? AND numChambre = ?";
+            String queryCheck = "SELECT COUNT(*) AS count FROM reservation WHERE (dateEntrer BETWEEN ? AND DATE_ADD(?, INTERVAL ? DAY)) AND numChambre = ?";
             ps = conn.prepareStatement(queryCheck);
-            ps.setDate(1, compteRendu.getDateReservation());
-            ps.setString(2, compteRendu.getNumChambre());
+            ps.setDate(1, compteRendu.getDateEntrer());
+            ps.setDate(2, compteRendu.getDateEntrer());
+            ps.setInt(3,compteRendu.getNombreJours());
+            ps.setString(4, compteRendu.getNumChambre());
             ResultSet rs = ps.executeQuery();
             rs.next();
             int count = rs.getInt("count");
-
             if (count > 0) {
                 JOptionPane.showMessageDialog(null, "La chambre est déjà occupée. Veuillez choisir une autre chambre.");
             } else {
