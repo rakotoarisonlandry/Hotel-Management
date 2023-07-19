@@ -51,8 +51,7 @@ public class ChambreController implements Initializable {
     public TextField TypeTextField;
     @FXML
     public TextField PrixNuiteTextField;
-//    @FXML
-//    public TextField DesignationTextField;
+
     @FXML
     public Button AjouterChambreButton;
 
