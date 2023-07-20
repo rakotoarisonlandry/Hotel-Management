@@ -1,7 +1,5 @@
 package com.landry.hotel.Models;
 
-import java.util.Date;
-
 public class Chambre {
     private String numChambre;
     private String Designation;

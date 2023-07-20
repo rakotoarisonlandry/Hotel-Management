@@ -1,5 +1,4 @@
 package com.landry.hotel.Models;
-import java.util.Date;
 
 public class Occuper {
 

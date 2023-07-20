@@ -3,8 +3,6 @@ package com.landry.hotel.Controllers;
 import com.itextpdf.text.Document;
 import com.landry.hotel.DB.DBConnection;
 import com.landry.hotel.DB.Query;
-import com.landry.hotel.Models.Chambre;
-import com.landry.hotel.Models.Occuper;
 import com.landry.hotel.Models.Sejour;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,12 +15,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Phrase;
 import  com.itextpdf.text.pdf.PdfWriter;
 import javafx.stage.StageStyle;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import javax.swing.*;
 import java.net.URL;
@@ -221,18 +216,6 @@ public class SejourController implements Initializable {
 
     public  void ActualiserButton() throws  Exception{
         showSejourList();
-//        ContentAllController contentAllController = new ContentAllController();
-//        Label soldeIdLabel = new Label(); // Créez une instance de Label pour l'utiliser comme argument
-//
-//        try {
-//            contentAllController.Soldeactuel(soldeIdLabel);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//// Utilisez la valeur mise à jour dans soldeIdLabel
-//        String soldeText = soldeIdLabel.getText();
-//        System.out.println("Solde actuel : " + soldeText);
         ReservationController rs = new ReservationController();
         rs.mettreAJourSoldeLabel();
     }

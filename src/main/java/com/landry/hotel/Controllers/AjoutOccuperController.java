@@ -1,7 +1,6 @@
 package com.landry.hotel.Controllers;
 import com.landry.hotel.DB.Query;
 import com.landry.hotel.Models.Occuper;
-import com.landry.hotel.Models.Sejour;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

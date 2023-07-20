@@ -2,9 +2,7 @@ package com.landry.hotel.Controllers;
 
 import com.landry.hotel.DB.DBConnection;
 import com.landry.hotel.DB.Query;
-import com.landry.hotel.Models.Chambre;
 import com.landry.hotel.Models.Occuper;
-import com.landry.hotel.Models.Reservation;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,8 +16,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
-import javax.swing.*;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -57,18 +53,6 @@ public class OccuperController implements Initializable {
     @FXML
     public void  ActionActualiser(ActionEvent event) throws  Exception{
         showOccuperList();
-//        ContentAllController contentAllController = new ContentAllController();
-//        Label soldeIdLabel = new Label(); // Créez une instance de Label pour l'utiliser comme argument
-//
-//        try {
-//            contentAllController.Soldeactuel(soldeIdLabel);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//// Utilisez la valeur mise à jour dans soldeIdLabel
-//        String soldeText = soldeIdLabel.getText();
-//        System.out.println("Solde actuel : " + soldeText);
         ReservationController rs = new ReservationController();
         rs.mettreAJourSoldeLabel();
     }

@@ -4,7 +4,6 @@ package com.landry.hotel.Controllers;
 
     import  com.landry.hotel.DB.DBConnection;
     import com.landry.hotel.DB.Query;
-    import com.landry.hotel.Models.Chambre;
     import com.landry.hotel.Models.Reservation;
     import javafx.collections.ObservableList;
     import javafx.event.ActionEvent;
@@ -21,24 +20,14 @@ package com.landry.hotel.Controllers;
     import javafx.scene.input.MouseEvent;
     import javafx.stage.Stage;
     import javafx.stage.StageStyle;
-
-    import javax.swing.*;
     import java.net.URL;
     import java.sql.Connection;
     import java.sql.PreparedStatement;
     import java.sql.SQLException;
-    import java.sql.Statement;
-    import java.time.LocalDate;
     import java.util.Date;
     import java.util.ResourceBundle;
 
     public class ReservationController implements Initializable {
-//        private ContentAllController contentAllController;
-//
-//        public ReservationController(ContentAllController contentAllController) {
-//            this.contentAllController = contentAllController;
-//        }
-
         PreparedStatement st ;
         Connection con;
         Integer idReservation;
@@ -166,15 +155,6 @@ package com.landry.hotel.Controllers;
                     ClearANDactive();
                     st.executeUpdate();
                     showReservationList();
-//
-//                    String recipient = MailClientTextField.getText();
-//                    String subject = " Bienvenue sur Hotel_Luxe";
-//                    String content = " Bonjour Mr/md" +NomClientTextField.getText()+"\n"+ " je tiens a vous informez ces informations :\n" +
-//                            "Chambre Occupé :" +NumChambreTextField.getText() +"\n"+ "Date Entrer : "
-//                            + DateEntrer.getValue()+ "\n"+ "Nombre de jours : " + NombreJoursTextField.getText() +"\n" + "Merci de Choisir le Luxe" ;
-//
-//                    Query query =new Query();
-//                    query.sendEmail(recipient , subject ,content);
                 }
             }
             catch (SQLException e) {
