@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -9,39 +10,42 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="HBoxChambreList" prefHeight="710.0" prefWidth="1091.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.landry.hotel.Controllers.ChambreController">
+<AnchorPane fx:id="HBoxChambreList" prefHeight="710.0" prefWidth="1112.0" style="-fx-background-color: rgba(249, 249, 234, 1); -fx-padding: 15px;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.landry.hotel.Controllers.ChambreController">
    <children>
-      <TableView fx:id="ChambreView" layoutX="47.0" layoutY="179.0" onMouseClicked="#getData" prefHeight="439.0" prefWidth="607.0">
+      <TableView fx:id="ChambreView" layoutX="9.0" layoutY="90.0" onMouseClicked="#getData" prefHeight="354.0" prefWidth="1093.0" style="-fx-border-color: rgba(249, 249, 234, 1); -fx-background-color: rgba(249, 249, 234, 1); -fx-padding: 0px;">
         <columns>
-          <TableColumn fx:id="ColInumchambre" prefWidth="116.66667175292969" text="Numero Chambre" />
-          <TableColumn fx:id="colDesignation" prefWidth="141.0" text="Designation" />
-            <TableColumn fx:id="coltype" minWidth="0.0" prefWidth="153.0" text="Type" />
-            <TableColumn fx:id="colPrixnuite" prefWidth="195.0" text="Prix Nuite" />
+          <TableColumn fx:id="ColInumchambre" prefWidth="281.0" text="Numero Chambre" />
+          <TableColumn fx:id="colDesignation" prefWidth="269.6666564941406" text="Designation" />
+            <TableColumn fx:id="coltype" minWidth="0.0" prefWidth="271.0" text="Type" />
+            <TableColumn fx:id="colPrixnuite" prefWidth="274.0" text="Prix Nuite" />
         </columns>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
       </TableView>
-      <Button layoutX="557.0" layoutY="120.0" mnemonicParsing="false" onAction="#RechercheBoutton" prefHeight="31.0" prefWidth="96.0" text="OK" />
-      <Button fx:id="ButtonMiseAJours" disable="true" layoutX="699.0" layoutY="489.0" mnemonicParsing="false" onAction="#ActionUpdateChambreButton" prefHeight="31.0" prefWidth="348.0" text="Mettre a Jours" />
-      <Button layoutX="48.0" layoutY="641.0" mnemonicParsing="false" onAction="#OnBtnDeleteClient" prefHeight="31.0" prefWidth="104.0" text="Supprimer" />
-      <Button fx:id="AjouterChambreButton" layoutX="48.0" layoutY="123.0" mnemonicParsing="false" onAction="#ActionAjouterChambreButton" prefHeight="31.0" prefWidth="104.0" style="-fx-font-weight: bold;" text="+" />
-      <Button fx:id="Actualiserbutton" layoutX="178.0" layoutY="640.0" mnemonicParsing="false" onAction="#ActuliserButtonChambre" prefHeight="31.0" prefWidth="104.0" text="Actualiser" />
-      <Label layoutX="694.0" layoutY="181.0" text="Designation:">
+      <Button layoutX="922.0" layoutY="42.0" mnemonicParsing="false" onAction="#RechercheBoutton" prefHeight="28.0" prefWidth="174.0" style="-fx-background-color: rgba(64, 61, 210, 1);" text="OK" textFill="WHITE" />
+      <Button fx:id="ButtonMiseAJours" disable="true" layoutX="11.0" layoutY="618.0" mnemonicParsing="false" onAction="#ActionUpdateChambreButton" prefHeight="28.0" prefWidth="1088.0" text="Mettre a Jours" textFill="#42493f" />
+      <Button layoutX="380.0" layoutY="472.0" mnemonicParsing="false" onAction="#OnBtnDeleteClient" prefHeight="28.0" prefWidth="363.0" style="-fx-background-color: rgba(240, 107, 107, 1);" text="Supprimer" textFill="WHITE" />
+      <Button fx:id="AjouterChambreButton" layoutX="7.0" layoutY="472.0" mnemonicParsing="false" onAction="#ActionAjouterChambreButton" prefHeight="29.0" prefWidth="363.0" style="-fx-font-weight: bold;" text="Nouveau" />
+      <Button fx:id="Actualiserbutton" layoutX="753.0" layoutY="473.0" mnemonicParsing="false" onAction="#ActuliserButtonChambre" prefHeight="28.0" prefWidth="352.0" style="-fx-background-color: rgba(249, 101, 48, 1);" text="Actualiser" textFill="WHITE" />
+      <Label layoutX="14.0" layoutY="526.0" text="Designation:" textFill="#42493f">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <TextField fx:id="DesignationTextField" disable="true" layoutX="695.0" layoutY="219.0" prefHeight="31.0" prefWidth="348.0" />
-      <TextField fx:id="TypeTextField" disable="true" layoutX="697.0" layoutY="317.0" prefHeight="31.0" prefWidth="348.0" />
-      <Label layoutX="697.0" layoutY="277.0" text="Type:">
+      <TextField fx:id="DesignationTextField" disable="true" layoutX="11.0" layoutY="559.0" prefHeight="28.0" prefWidth="348.0" />
+      <TextField fx:id="TypeTextField" disable="true" layoutX="377.0" layoutY="558.0" prefHeight="28.0" prefWidth="363.0" />
+      <Label layoutX="379.0" layoutY="526.0" text="Type:" textFill="#42493f">
+         <font>
+            <Font size="13.0" />
+         </font> rgba(240, 107, 107, 1)
+      </Label>
+      <Label layoutX="751.0" layoutY="527.0" text="Prix Nuité:" textFill="#42493f">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label layoutX="697.0" layoutY="381.0" text="Prix Nuité:">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <TextField fx:id="PrixNuiteTextField" disable="true" layoutX="697.0" layoutY="421.0" prefHeight="31.0" prefWidth="348.0" />
-      <DatePicker fx:id="DateRecherche" layoutX="328.0" layoutY="119.0" prefHeight="31.0" prefWidth="219.0" promptText="Rechercher Les Chambres Libres.." />
+      <TextField fx:id="PrixNuiteTextField" disable="true" layoutX="749.0" layoutY="558.0" prefHeight="28.0" prefWidth="363.0" />
+      <DatePicker fx:id="DateRecherche" layoutX="556.0" layoutY="42.0" prefHeight="28.0" prefWidth="348.0" promptText="Rechercher Les Chambres Libres.." />
    </children>
 </AnchorPane>

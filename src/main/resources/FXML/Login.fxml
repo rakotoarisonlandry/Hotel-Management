@@ -14,11 +14,11 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="492.0" prefWidth="774.0" style="-fx-background-color: #fff;" stylesheets="@../Styles/login.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.landry.hotel.Controllers.LoginController">
+<AnchorPane prefHeight="492.0" prefWidth="781.0" style="-fx-background-color: rgba(249, 249, 234, 1);" stylesheets="@../Styles/login.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.landry.hotel.Controllers.LoginController">
    <children>
-      <VBox layoutX="2.0" prefHeight="492.0" prefWidth="387.0" style="-fx-background-color: #070141;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="394.0" AnchorPane.topAnchor="0.0">
+      <VBox layoutX="14.0" layoutY="-1.0" prefHeight="492.0" prefWidth="406.0" style="-fx-background-color: #fff;" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="361.0" AnchorPane.topAnchor="-1.0">
          <children>
-            <ImageView fitHeight="210.0" fitWidth="316.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="270.0" fitWidth="304.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/illustration-offrez-vous-un-creatif.png" />
                </image>
@@ -27,8 +27,8 @@
                </VBox.margin>
             </ImageView>
          </children></VBox>
-      <TextField fx:id="userTextFiled" layoutX="465.0" layoutY="155.0" prefHeight="29.0" prefWidth="246.0" style="-fx-border-radius: 25%;" />
-      <Label layoutX="467.0" layoutY="126.0" style="-fx-font-weight: bold;" text="Username:">
+      <TextField fx:id="userTextFiled" layoutX="452.0" layoutY="180.0" prefHeight="29.0" prefWidth="293.0" style="-fx-border-radius: 25%;" />
+      <Label layoutX="454.0" layoutY="151.0" style="-fx-font-weight: bold;" text="Username:">
          <font>
             <Font size="14.0" />
          </font>
@@ -48,7 +48,7 @@
                </stops>
             </LinearGradient>
          </textFill></Label>
-      <Label layoutX="469.0" layoutY="202.0" style="-fx-font-weight: bold;" text="Password:">
+      <Label layoutX="456.0" layoutY="227.0" style="-fx-font-weight: bold;" text="Password:">
          <font>
             <Font size="14.0" />
          </font>
@@ -68,13 +68,23 @@
                </stops>
             </LinearGradient>
          </textFill></Label>
-      <Button fx:id="Cancelbutton" layoutX="467.0" layoutY="370.0" mnemonicParsing="false" onAction="#annuler" prefHeight="30.0" prefWidth="246.0" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #cc3229;" text="Annuler" textFill="WHITE" />
-      <Button fx:id="login" layoutX="466.0" layoutY="318.0" mnemonicParsing="false" onAction="#ActionBoutton" prefHeight="30.0" prefWidth="246.0" style="-fx-background-color: #3e2eca; -fx-font-weight: bold; -fx-font-size: 14px;" text="Se Connecter" textFill="WHITE" />
-      <PasswordField fx:id="passwordField" layoutX="467.0" layoutY="233.0" prefHeight="29.0" prefWidth="246.0" />
+      <Button fx:id="Cancelbutton" layoutX="454.0" layoutY="395.0" mnemonicParsing="false" onAction="#annuler" prefHeight="30.0" prefWidth="293.0" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: rgba(240, 107, 107, 1);" text="Annuler" textFill="WHITE" />
+      <Button fx:id="login" layoutX="453.0" layoutY="343.0" mnemonicParsing="false" onAction="#ActionBoutton" prefHeight="30.0" prefWidth="293.0" style="-fx-background-color: #3e2eca; -fx-font-weight: bold; -fx-font-size: 14px;" text="Se Connecter" textFill="WHITE" />
+      <PasswordField fx:id="passwordField" layoutX="454.0" layoutY="258.0" prefHeight="29.0" prefWidth="293.0" />
       <Label fx:id="errorMessage" layoutX="439.0" layoutY="296.0" style="-fx-font-size: 14px;" text=" " textFill="#dd1212" />
-      <ImageView fitHeight="20.0" fitWidth="26.0" layoutX="504.0" layoutY="325.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="20.0" fitWidth="26.0" layoutX="501.0" layoutY="349.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/reservation.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="30.0" fitWidth="35.0" layoutX="497.0" layoutY="395.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/icons8-cancel-48.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="109.0" fitWidth="104.0" layoutX="543.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/usericon.png" />
          </image>
       </ImageView>
    </children>
