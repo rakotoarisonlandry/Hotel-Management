@@ -10,14 +10,11 @@ public class App extends Application{
     @Override
     public void start(Stage primarystage) throws Exception {
         FXMLLoader root=new FXMLLoader(getClass().getResource("/FXMl/Login.fxml"));
-
         primarystage.initStyle(StageStyle.UNDECORATED);
-
         Scene scene = new Scene(root.load());
         primarystage.setScene( scene);
         primarystage.show();
     }
-
     public static  void  main(String[] args){
         launch(args);
     }

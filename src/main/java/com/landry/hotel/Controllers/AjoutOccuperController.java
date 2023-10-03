@@ -30,7 +30,6 @@ public class AjoutOccuperController implements Initializable {
         JOptionPane.showMessageDialog(null,"SuccessFully Added");
         ActionannulerOccuperButton(event);
     }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }

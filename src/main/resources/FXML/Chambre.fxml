@@ -23,11 +23,11 @@
             <Insets />
          </opaqueInsets>
       </TableView>
-      <Button layoutX="922.0" layoutY="42.0" mnemonicParsing="false" onAction="#RechercheBoutton" prefHeight="28.0" prefWidth="174.0" style="-fx-background-color: rgba(64, 61, 210, 1);" text="OK" textFill="WHITE" />
+      <Button layoutX="922.0" layoutY="42.0" mnemonicParsing="false" onAction="#RechercheBoutton" prefHeight="28.0" prefWidth="174.0" style="-fx-background-color: rgba(64, 61, 210, 1); -fx-font-weight: bold;" text="OK" textFill="WHITE" />
       <Button fx:id="ButtonMiseAJours" disable="true" layoutX="11.0" layoutY="618.0" mnemonicParsing="false" onAction="#ActionUpdateChambreButton" prefHeight="28.0" prefWidth="1088.0" text="Mettre a Jours" textFill="#42493f" />
-      <Button layoutX="380.0" layoutY="472.0" mnemonicParsing="false" onAction="#OnBtnDeleteClient" prefHeight="28.0" prefWidth="363.0" style="-fx-background-color: rgba(240, 107, 107, 1);" text="Supprimer" textFill="WHITE" />
-      <Button fx:id="AjouterChambreButton" layoutX="7.0" layoutY="472.0" mnemonicParsing="false" onAction="#ActionAjouterChambreButton" prefHeight="29.0" prefWidth="363.0" style="-fx-font-weight: bold;" text="Nouveau" />
-      <Button fx:id="Actualiserbutton" layoutX="753.0" layoutY="473.0" mnemonicParsing="false" onAction="#ActuliserButtonChambre" prefHeight="28.0" prefWidth="352.0" style="-fx-background-color: rgba(249, 101, 48, 1);" text="Actualiser" textFill="WHITE" />
+      <Button layoutX="380.0" layoutY="472.0" mnemonicParsing="false" onAction="#OnBtnDeleteClient" prefHeight="28.0" prefWidth="363.0" style="-fx-background-color: rgba(229, 72, 89, 1); -fx-font-weight: bold;" text="Supprimer" textFill="WHITE" />
+      <Button fx:id="AjouterChambreButton" layoutX="7.0" layoutY="472.0" mnemonicParsing="false" onAction="#ActionAjouterChambreButton" prefHeight="29.0" prefWidth="363.0" style="-fx-font-weight: bold; -fx-background-color: rgba(64, 61, 194, 1); -fx-opacity: 0.9;" text="Nouveau" textFill="WHITE" />
+      <Button fx:id="Actualiserbutton" layoutX="753.0" layoutY="473.0" mnemonicParsing="false" onAction="#ActuliserButtonChambre" prefHeight="28.0" prefWidth="352.0" style="-fx-background-color: rgba(249, 101, 48, 1); -fx-font-weight: bold;" text="Actualiser" textFill="WHITE" />
       <Label layoutX="14.0" layoutY="526.0" text="Designation:" textFill="#42493f">
          <font>
             <Font size="13.0" />

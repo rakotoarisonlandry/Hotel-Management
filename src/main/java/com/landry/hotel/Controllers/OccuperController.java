@@ -23,8 +23,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class OccuperController implements Initializable {
-
+public class OccuperController implements Initializable{
     Connection con;
     PreparedStatement st;
     public TableView<Occuper> OccuperView;

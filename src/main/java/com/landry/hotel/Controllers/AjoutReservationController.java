@@ -11,7 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
@@ -58,10 +57,7 @@ public class AjoutReservationController implements Initializable {
         BackButton(event);
     }
 
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
     }
 }

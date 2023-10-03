@@ -65,7 +65,7 @@ public class ChambreController implements Initializable {
             Parent root  = FXMLLoader.load(getClass().getResource("/FXML/AjoutChambre.fxml"));
             Stage primarystage = new Stage();
             primarystage.initStyle(StageStyle.UNDECORATED);
-            primarystage.setScene(new Scene(root ,490,477));
+            primarystage.setScene(new Scene(root ,459,581));
             primarystage.show();
         }
         catch (Exception e ){
